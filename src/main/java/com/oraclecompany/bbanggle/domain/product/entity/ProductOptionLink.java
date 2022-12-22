@@ -18,11 +18,11 @@ public class ProductOptionLink {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_option_group_id")
     private ProductOptionGroup productOptionGroup;
 
     @Column(name = "seq", nullable = false)
