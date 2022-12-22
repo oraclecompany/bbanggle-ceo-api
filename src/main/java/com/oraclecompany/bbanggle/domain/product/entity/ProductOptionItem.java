@@ -17,7 +17,7 @@ public class ProductOptionItem {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_option_group_id")
     private ProductOptionGroup productOptionGroup;
 
     @Column(name = "name", nullable = false)
