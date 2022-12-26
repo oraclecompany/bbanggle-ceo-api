@@ -1,49 +1,58 @@
 package com.oraclecompany.bbanggle.domain.ceo.entity;
 
-import com.oraclecompany.bbanggle.api.auth.dto.CeoSignupRequestDto;
+import com.oraclecompany.bbanggle.api.auth.constant.Role;
+import com.oraclecompany.bbanggle.api.auth.dto.CeoSignupDto;
+import com.oraclecompany.bbanggle.domain.ceo.constant.CeoStatus;
+import com.oraclecompany.bbanggle.domain.ceo.constant.CeoType;
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Entity(name = "CEO")
+@Entity
 public class Ceo extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private  Long id;
 
-    @Column(name = "store_id")
-    private String storeId;
+    private  Long storeId;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
+    private String loginId;
+
     private String email;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "type")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private CeoType type;
 
-    @Column(name = "tel")
+    @Enumerated(EnumType.STRING)
+    private CeoStatus status;
+
     private String tel;
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public Ceo(CeoSignupRequestDto request) {
-        email = request.getEmail();
-        password = request.getPassword();
-        name = request.getName();
+    public Ceo(CeoSignupDto.Request request) {
+        this.name = request.getName();
+        this.storeId = request.getStoreId();
+        this.loginId = request.getLoginId();
+        this.email = request.getEmail();
+        this.password = request.getPassword();
+        this.status = request.getStatus();
+        this.type = request.getType();
+        this.tel = request.getTel();
+        this.role = Role.USER;
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder) {
