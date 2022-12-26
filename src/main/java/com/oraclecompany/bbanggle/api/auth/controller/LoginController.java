@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.api.auth.controller;
 
-import com.oraclecompany.bbanggle.api.auth.dto.CeoSignupDto;
+import com.oraclecompany.bbanggle.api.auth.dto.SignupDto;
 import com.oraclecompany.bbanggle.api.auth.dto.JwtRequestDto;
 import com.oraclecompany.bbanggle.api.auth.dto.JwtResponseDto;
 import com.oraclecompany.bbanggle.api.auth.service.LoginService;
@@ -24,18 +24,14 @@ public class LoginController {
 
     @ApiOperation(value = "회원가입 API", notes = "사장님 계정 회원가입을 진행한다.")
     @PostMapping(value = "signup", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CeoSignupDto.Response> signup(@RequestBody CeoSignupDto.Request request) {
+    public ResponseEntity<SignupDto.Response> signup(@RequestBody SignupDto.Request request) {
         return ResponseEntity.ok(loginService.signup(request));
     }
 
     @ApiOperation(value = "로그인 API", notes = "사장님 로그인을 진행한다.")
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public JwtResponseDto login(@RequestBody JwtRequestDto request) {
-        try {
-            return loginService.login(request);
-        } catch (Exception e) {
-            return new JwtResponseDto(e.getMessage());
-        }
+    public ResponseEntity<JwtResponseDto> login(@RequestBody JwtRequestDto request) throws Exception {
+        return ResponseEntity.ok(loginService.login(request));
     }
 }
 

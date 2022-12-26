@@ -1,7 +1,7 @@
 package com.oraclecompany.bbanggle.domain.ceo.entity;
 
 import com.oraclecompany.bbanggle.api.auth.constant.Role;
-import com.oraclecompany.bbanggle.api.auth.dto.CeoSignupDto;
+import com.oraclecompany.bbanggle.api.auth.dto.SignupDto;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoStatus;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoType;
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
@@ -43,7 +43,7 @@ public class Ceo extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Ceo(CeoSignupDto.Request request) {
+    public Ceo(SignupDto.Request request) {
         this.name = request.getName();
         this.storeId = request.getStoreId();
         this.loginId = request.getLoginId();
