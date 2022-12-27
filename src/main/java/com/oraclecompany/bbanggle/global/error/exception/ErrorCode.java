@@ -31,6 +31,7 @@ public enum ErrorCode {
 
     // 상품
     NOT_EXIST_PRODUCT(HttpStatus.BAD_REQUEST, "P-001", "존재하지 않는 상품입니다."),
+    INVALID_PRODUCT_QUANTITY(HttpStatus.BAD_REQUEST, "P-002", "수량이 0보다 작을 수 없습니다."),
     ;
 
 

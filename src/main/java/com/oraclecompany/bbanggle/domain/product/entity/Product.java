@@ -82,7 +82,11 @@ public class Product extends BaseEntity {
         this.quantity = quantity;
     }
 
-    public void plusQuantity(int quantity) {
-        this.quantity = quantity + 1;
+    public void plusQuantity() {
+        this.quantity += 1;
+    }
+
+    public void minusQuantity() {
+        this.quantity -= 1;
     }
 }

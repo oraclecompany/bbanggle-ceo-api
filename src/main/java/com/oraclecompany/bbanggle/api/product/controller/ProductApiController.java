@@ -3,7 +3,6 @@ package com.oraclecompany.bbanggle.api.product.controller;
 import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
 import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
 import com.oraclecompany.bbanggle.api.product.service.ProductApiService;
-import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -44,5 +43,11 @@ public class ProductApiController {
         return ResponseEntity.ok("수량이 증가되었습니다.");
     }
 
-
+    @ApiOperation(value = "상품 수량 감소 api", notes = "상품 수량 감소")
+    @PatchMapping("/products/{productId}/quantity/minus")
+    public ResponseEntity<String> updateProductQuantityMinus(
+            @PathVariable("productId") Long productId) {
+        productApiService.updateProductQuantityMinus(productId);
+        return ResponseEntity.ok("수량이 감소되었습니다.");
+    }
 }

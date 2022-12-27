@@ -4,11 +4,11 @@ import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
 import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
-import com.oraclecompany.bbanggle.domain.product.entity.ProductTimetable;
-import com.oraclecompany.bbanggle.domain.product.repository.ProductGroupLinkRepository;
 import com.oraclecompany.bbanggle.domain.product.service.ProductService;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.domain.store.service.StoreService;
+import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
+import com.oraclecompany.bbanggle.global.error.exception.InvalidValueException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +40,15 @@ public class ProductApiService {
 
     public void updateProductQuantityPlus(Long productId) {
         Product findProduct = productService.findProduct(productId);
-        findProduct.plusQuantity(findProduct.getQuantity());
+        findProduct.plusQuantity();
+    }
+
+    public void updateProductQuantityMinus(Long productId) {
+        Product findProduct = productService.findProduct(productId);
+        if(findProduct.getQuantity() == 0) {
+            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
+        }
+        findProduct.minusQuantity();
     }
 
 
