@@ -89,4 +89,8 @@ public class Product extends BaseEntity {
     public void minusQuantity() {
         this.quantity -= 1;
     }
+
+    public void updateStatus(SellStatus status) {
+        this.status = status;
+    }
 }

@@ -2,6 +2,7 @@ package com.oraclecompany.bbanggle.api.product.service;
 
 import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
 import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
+import com.oraclecompany.bbanggle.domain.product.constant.SellStatus;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
 import com.oraclecompany.bbanggle.domain.product.service.ProductService;
@@ -51,5 +52,13 @@ public class ProductApiService {
         findProduct.minusQuantity();
     }
 
+    public void updateProductSellStatus(Long productId) {
+        Product findProduct = productService.findProduct(productId);
 
+        if(findProduct.getStatus() == SellStatus.SL) {
+            findProduct.updateStatus(SellStatus.SO);
+        } else {
+            findProduct.updateStatus(SellStatus.SL);
+        }
+    }
 }

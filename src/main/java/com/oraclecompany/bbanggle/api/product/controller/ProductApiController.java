@@ -50,4 +50,12 @@ public class ProductApiController {
         productApiService.updateProductQuantityMinus(productId);
         return ResponseEntity.ok("수량이 감소되었습니다.");
     }
+
+    @ApiOperation(value = "상품 품절 상태 변경 api", notes = "상품 품절 상태 변경")
+    @PatchMapping("/products/{productId}/status")
+    public ResponseEntity<String> updateProductSellStatus(
+            @PathVariable("productId") Long productId) {
+        productApiService.updateProductSellStatus(productId);
+        return ResponseEntity.ok("상품 품절 상태가 변경되었습니다.");
+    }
 }
