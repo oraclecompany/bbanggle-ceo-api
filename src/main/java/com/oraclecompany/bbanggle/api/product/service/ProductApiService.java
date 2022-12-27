@@ -1,6 +1,7 @@
 package com.oraclecompany.bbanggle.api.product.service;
 
 import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
+import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductTimetable;
@@ -25,13 +26,15 @@ public class ProductApiService {
     private final StoreService storeService;
 
     public List<ProductListResponseDto> selectProductList(Pageable pageable, Long storeId) {
-        //TODO 여기에 스토어 서비스 만들기
         Store store = storeService.selectStore(storeId);
-
         Page<ProductGroupLink> productList = productService.selectProductList(pageable, store);
-
         return productList.stream()
                 .map(ProductListResponseDto::of)
                 .toList();
+    }
+
+    public void updateProductQuantity(Long productId, ProductQuantityUpdateDto productQuantityUpdateDto) {
+        Product findProduct = productService.findProduct(productId);
+        findProduct.modifyQuantity(productQuantityUpdateDto.getQuantity());
     }
 }

@@ -27,8 +27,12 @@ public enum ErrorCode {
 
     // 주문
     NOT_EXIST_ORDER(HttpStatus.BAD_REQUEST , "O-001", "존재하지 않는 주문입니다."),
-    NOT_EXIST_ORDER_ITEM(HttpStatus.BAD_REQUEST, "O-002", "존재하지 않는 주문상품입니다.")
+    NOT_EXIST_ORDER_ITEM(HttpStatus.BAD_REQUEST, "O-002", "존재하지 않는 주문상품입니다."),
+
+    // 상품
+    NOT_EXIST_PRODUCT(HttpStatus.BAD_REQUEST, "P-001", "존재하지 않는 상품입니다."),
     ;
+
 
 
     ErrorCode(HttpStatus httpStatus, String errorCode, String message) {

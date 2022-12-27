@@ -77,4 +77,8 @@ public class Product extends BaseEntity {
         this.signatureYn = signatureYn;
         this.defaultQuantity = defaultQuantity;
     }
+
+    public void modifyQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

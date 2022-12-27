@@ -1,11 +1,15 @@
 package com.oraclecompany.bbanggle.domain.product.service;
 
+import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductGroupLinkRepository;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductRepository;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
+import com.oraclecompany.bbanggle.global.error.exception.EntityNotFoundException;
+import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,9 +26,14 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public Page<ProductGroupLink> selectProductList(Pageable pageable, Store store) {
-
         List<Product> productList = productRepository.findByStore(store);
-
         return productGroupLinkRepository.findByProduct(pageable, productList);
     }
+
+    public Product findProduct(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOT_EXIST_PRODUCT));
+    }
+
+
 }
