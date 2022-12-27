@@ -31,6 +31,9 @@ public enum ErrorCode {
 
     // 상품
     NOT_EXIST_PRODUCT(HttpStatus.BAD_REQUEST, "P-001", "존재하지 않는 상품입니다."),
+
+    // 상점
+    NOT_EXIST_STORE(HttpStatus.BAD_REQUEST, "S-001", "존재하지 않는 상점입니다."),
     ;
 
 

@@ -51,7 +51,7 @@ public class Store extends BaseEntity {
     private String tel;
 
     @Column(length = 100)
-    private String ceo_comment;
+    private String ceoComment;
 
     @Column(length = 100)
     private String countryOrigin;
@@ -69,7 +69,7 @@ public class Store extends BaseEntity {
                  BigDecimal lng,
                  String bizHour,
                  String tel,
-                 String ceo_comment,
+                 String ceoComment,
                  String countryOrigin,
                  Time cancellableTime) {
         this.name = name;
@@ -81,8 +81,12 @@ public class Store extends BaseEntity {
         this.lng = lng;
         this.bizHour = bizHour;
         this.tel = tel;
-        this.ceo_comment = ceo_comment;
+        this.ceoComment = ceoComment;
         this.countryOrigin = countryOrigin;
         this.cancellableTime = cancellableTime;
+    }
+
+    public void modifyStatus(StoreStatus storeStatus) {
+        this.storeStatus = storeStatus;
     }
 }

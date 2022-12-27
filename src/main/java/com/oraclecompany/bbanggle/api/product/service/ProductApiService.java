@@ -4,8 +4,6 @@ import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
 import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
-import com.oraclecompany.bbanggle.domain.product.entity.ProductTimetable;
-import com.oraclecompany.bbanggle.domain.product.repository.ProductGroupLinkRepository;
 import com.oraclecompany.bbanggle.domain.product.service.ProductService;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.domain.store.service.StoreService;
@@ -26,7 +24,7 @@ public class ProductApiService {
     private final StoreService storeService;
 
     public List<ProductListResponseDto> selectProductList(Pageable pageable, Long storeId) {
-        Store store = storeService.selectStore(storeId);
+        Store store = storeService.findStoreById(storeId);
         Page<ProductGroupLink> productList = productService.selectProductList(pageable, store);
         return productList.stream()
                 .map(ProductListResponseDto::of)
