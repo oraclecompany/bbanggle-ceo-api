@@ -13,4 +13,6 @@ public interface CeoRepository extends JpaRepository<Ceo, Long> {
 
     Optional<Ceo> findByName(String nickname);
 
+    Optional<Ceo> findByLoginId(String loginId);
+
 }

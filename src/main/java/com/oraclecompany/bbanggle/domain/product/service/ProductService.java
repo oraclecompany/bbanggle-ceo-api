@@ -5,6 +5,8 @@ import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductGroupLinkRepository;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductRepository;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
+import com.oraclecompany.bbanggle.global.error.exception.EntityNotFoundException;
+import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,4 +27,11 @@ public class ProductService {
         List<Product> productList = productRepository.findByStore(store);
         return productGroupLinkRepository.findByProduct(pageable, productList);
     }
+
+    public Product findProduct(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOT_EXIST_PRODUCT));
+    }
+
+
 }

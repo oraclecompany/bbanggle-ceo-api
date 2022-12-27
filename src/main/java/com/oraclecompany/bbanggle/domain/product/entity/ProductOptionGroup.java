@@ -29,7 +29,6 @@ public class ProductOptionGroup extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private YesOrNo multiCheckYn;
 
-    @Column
     private int maxCheckCount;
 
     @Builder

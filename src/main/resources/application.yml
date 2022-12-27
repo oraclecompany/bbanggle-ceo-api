@@ -51,6 +51,7 @@ feign:
         connectTimeout: 5000
         readTimeout: 5000
 
-jwt:
-  secret: YOUR_SECRET_KEY
-  access-expired: 1800 # 30(분) - 단위 (초)
+token:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJYOUR_SECRET_KEYpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+  access-token-expiration-time: 900000  # 15분: 1000(ms) x 60(s) x 15(m)
+  refresh-token-expiration-time: 1209600000 # 2주: 1000(ms) x 60(s) x 60(m) x 24(h) x 14(d)

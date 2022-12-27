@@ -1,5 +1,6 @@
-package com.oraclecompany.bbanggle.global.config.web.web;
+package com.oraclecompany.bbanggle.global.config.web;
 
+import com.oraclecompany.bbanggle.memberinfo.MemberInfoArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    private final MemberInfoArgumentResolver memberInfoArgumentResolver;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
