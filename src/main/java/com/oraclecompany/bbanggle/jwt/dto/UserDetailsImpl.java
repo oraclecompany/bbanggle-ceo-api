@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.security;
+package com.oraclecompany.bbanggle.jwt.dto;
 
 import com.oraclecompany.bbanggle.api.login.constant.Role;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
@@ -12,13 +12,12 @@ import java.util.Collection;
 
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
-    private static final String ROLE_PREFIX = "ROLE_";
     private final Ceo ceo;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Role role = ceo.getRole();
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(ROLE_PREFIX + role.toString());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.toString());
         Collection<GrantedAuthority> authorities = new ArrayList<>(); //List인 이유 : 여러개의 권한을 가질 수 있다
         authorities.add(authority);
 
@@ -32,7 +31,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return ceo.getEmail();
+        return ceo.getName();
     }
 
     @Override
@@ -57,5 +56,13 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getName() {
         return ceo.getName();
+    }
+
+    public Long getId() {
+        return ceo.getId();
+    }
+
+    public Role getRole() {
+        return ceo.getRole();
     }
 }
