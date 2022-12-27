@@ -27,7 +27,7 @@ public class ProductApiService {
     private final StoreService storeService;
 
     public List<ProductListResponseDto> selectProductList(Pageable pageable, Long storeId) {
-        Store store = storeService.selectStore(storeId);
+        Store store = storeService.findStoreById(storeId);
         Page<ProductGroupLink> productList = productService.selectProductList(pageable, store);
         return productList.stream()
                 .map(ProductListResponseDto::of)
