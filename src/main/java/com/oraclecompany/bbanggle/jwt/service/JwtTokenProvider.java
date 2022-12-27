@@ -1,6 +1,8 @@
-package com.oraclecompany.bbanggle.security;
+package com.oraclecompany.bbanggle.jwt.service;
 
 import com.oraclecompany.bbanggle.api.login.constant.Role;
+import com.oraclecompany.bbanggle.jwt.dto.UserDetailsImpl;
+import com.oraclecompany.bbanggle.jwt.dto.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -25,11 +27,11 @@ import java.util.Map;
 @Component
 public class JwtTokenProvider {
 
-    @Value("${jwt.secret}")
+    @Value("${token.secret}")
     private String secretKey;
 
     // 토큰 유효시간 30분
-    @Value("${jwt.access-expired}")
+    @Value("${token.access-token-expiration-time}")
     private long tokenValidTime;
 
     private final UserDetailsServiceImpl userDetailsService;
@@ -44,7 +46,7 @@ public class JwtTokenProvider {
 
         Map<String, Object> claims = new HashMap<>();
 
-        val isAdmin = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_"+ Role.ADMIN));
+        val isAdmin = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_"+ Role.ROLE_ADMIN));
         if (isAdmin) {
             claims.put("role","admin");
         } else {
@@ -76,7 +78,7 @@ public class JwtTokenProvider {
 
     // 토큰에서 회원 정보 추출
     public String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("memberId").toString();
     }
 
     // Request의 Header에서 token 값을 가져옴.

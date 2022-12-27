@@ -52,7 +52,7 @@ public class Ceo extends BaseEntity {
         this.status = request.getStatus();
         this.type = request.getType();
         this.tel = request.getTel();
-        this.role = Role.USER;
+        this.role = Role.ROLE_USER;
     }
 
     public void encryptPassword(PasswordEncoder passwordEncoder) {

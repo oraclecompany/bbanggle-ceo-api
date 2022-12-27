@@ -4,6 +4,7 @@ import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
 import com.oraclecompany.bbanggle.api.login.dto.JwtRequestDto;
 import com.oraclecompany.bbanggle.api.login.dto.JwtResponseDto;
 import com.oraclecompany.bbanggle.api.login.service.LoginService;
+import com.oraclecompany.bbanggle.jwt.dto.JwtTokenDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class LoginController {
 
     @ApiOperation(value = "로그인 API", notes = "사장님 로그인을 진행한다.")
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JwtResponseDto> login(@RequestBody JwtRequestDto request) throws Exception {
+    public ResponseEntity<JwtTokenDto> login(@RequestBody JwtRequestDto request) throws Exception {
         return ResponseEntity.ok(loginService.login(request));
     }
 }

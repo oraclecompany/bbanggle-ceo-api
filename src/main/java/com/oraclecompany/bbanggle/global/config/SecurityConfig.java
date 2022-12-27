@@ -1,7 +1,7 @@
 package com.oraclecompany.bbanggle.global.config;
 
-import com.oraclecompany.bbanggle.security.JwtAuthenticationFilter;
-import com.oraclecompany.bbanggle.security.JwtTokenProvider;
+import com.oraclecompany.bbanggle.jwt.service.JwtAuthenticationFilter;
+import com.oraclecompany.bbanggle.jwt.service.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 
 /**
  * Spring Security 설정

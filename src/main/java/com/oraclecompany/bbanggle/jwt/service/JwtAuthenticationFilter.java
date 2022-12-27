@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.security;
+package com.oraclecompany.bbanggle.jwt.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
