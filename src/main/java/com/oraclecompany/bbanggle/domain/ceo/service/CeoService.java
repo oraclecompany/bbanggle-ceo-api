@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.domain.ceo.service;
 
-import com.oraclecompany.bbanggle.api.auth.dto.SignupDto;
+import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
 import com.oraclecompany.bbanggle.domain.ceo.repository.CeoRepository;
 import lombok.RequiredArgsConstructor;

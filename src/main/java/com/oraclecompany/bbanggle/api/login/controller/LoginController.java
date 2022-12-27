@@ -1,9 +1,9 @@
-package com.oraclecompany.bbanggle.api.auth.controller;
+package com.oraclecompany.bbanggle.api.login.controller;
 
-import com.oraclecompany.bbanggle.api.auth.dto.SignupDto;
-import com.oraclecompany.bbanggle.api.auth.dto.JwtRequestDto;
-import com.oraclecompany.bbanggle.api.auth.dto.JwtResponseDto;
-import com.oraclecompany.bbanggle.api.auth.service.LoginService;
+import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
+import com.oraclecompany.bbanggle.api.login.dto.JwtRequestDto;
+import com.oraclecompany.bbanggle.api.login.dto.JwtResponseDto;
+import com.oraclecompany.bbanggle.api.login.service.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

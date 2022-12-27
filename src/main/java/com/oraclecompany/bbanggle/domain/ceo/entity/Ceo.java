@@ -1,7 +1,7 @@
 package com.oraclecompany.bbanggle.domain.ceo.entity;
 
-import com.oraclecompany.bbanggle.api.auth.constant.Role;
-import com.oraclecompany.bbanggle.api.auth.dto.SignupDto;
+import com.oraclecompany.bbanggle.api.login.constant.Role;
+import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoStatus;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoType;
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;

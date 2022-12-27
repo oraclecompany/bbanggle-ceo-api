@@ -1,14 +1,13 @@
-package com.oraclecompany.bbanggle.api.auth.service;
+package com.oraclecompany.bbanggle.api.login.service;
 
-import com.oraclecompany.bbanggle.api.auth.dto.SignupDto;
-import com.oraclecompany.bbanggle.api.auth.dto.JwtRequestDto;
-import com.oraclecompany.bbanggle.api.auth.dto.JwtResponseDto;
+import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
+import com.oraclecompany.bbanggle.api.login.dto.JwtRequestDto;
+import com.oraclecompany.bbanggle.api.login.dto.JwtResponseDto;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
 import com.oraclecompany.bbanggle.domain.ceo.service.CeoService;
 import com.oraclecompany.bbanggle.security.JwtTokenProvider;
 import com.oraclecompany.bbanggle.security.UserDetailsImpl;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

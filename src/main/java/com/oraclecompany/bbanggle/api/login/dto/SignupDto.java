@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.api.auth.dto;
+package com.oraclecompany.bbanggle.api.login.dto;
 
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoStatus;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoType;

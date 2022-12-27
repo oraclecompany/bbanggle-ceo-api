@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.api.auth.controller;
+package com.oraclecompany.bbanggle.api.login.controller;
 
 import org.springframework.security.test.context.support.WithMockUser;
 

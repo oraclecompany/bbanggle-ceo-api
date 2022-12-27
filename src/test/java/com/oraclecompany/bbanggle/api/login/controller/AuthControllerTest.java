@@ -1,6 +1,6 @@
-package com.oraclecompany.bbanggle.api.auth.controller;
+package com.oraclecompany.bbanggle.api.login.controller;
 
-import com.oraclecompany.bbanggle.api.auth.service.LoginService;
+import com.oraclecompany.bbanggle.api.login.service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

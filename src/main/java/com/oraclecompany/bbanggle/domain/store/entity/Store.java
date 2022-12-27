@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Time;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -31,6 +32,7 @@ public class Store extends BaseEntity {
     private String notice;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private StoreStatus storeStatus;
 
     @Column
@@ -55,7 +57,7 @@ public class Store extends BaseEntity {
     private String countryOrigin;
 
     @Column
-    private Integer cancellableTime;
+    private Time cancellableTime;
 
     @Builder
     public Store(String name,
@@ -69,7 +71,7 @@ public class Store extends BaseEntity {
                  String tel,
                  String ceo_comment,
                  String countryOrigin,
-                 Integer cancellableTime) {
+                 Time cancellableTime) {
         this.name = name;
         this.intro = intro;
         this.notice = notice;

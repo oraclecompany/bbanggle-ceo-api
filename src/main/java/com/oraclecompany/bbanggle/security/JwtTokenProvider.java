@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.security;
 
-import com.oraclecompany.bbanggle.api.auth.constant.Role;
+import com.oraclecompany.bbanggle.api.login.constant.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;

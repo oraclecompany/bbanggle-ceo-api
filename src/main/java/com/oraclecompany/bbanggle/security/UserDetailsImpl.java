@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.security;
 
-import com.oraclecompany.bbanggle.api.auth.constant.Role;
+import com.oraclecompany.bbanggle.api.login.constant.Role;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

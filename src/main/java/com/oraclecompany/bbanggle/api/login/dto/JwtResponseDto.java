@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.api.auth.dto;
+package com.oraclecompany.bbanggle.api.login.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
