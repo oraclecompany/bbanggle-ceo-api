@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ProductOptionLink extends BaseEntity {
+public class ProductTimetable extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,19 +23,20 @@ public class ProductOptionLink extends BaseEntity {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_option_group_id")
-    private ProductOptionGroup productOptionGroup;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private DayCode dayCode;
 
     @Column(nullable = false)
-    private int seq;
+    @Enumerated(EnumType.STRING)
+    private YesOrNo deleteYn;
 
     @Builder
-    public ProductOptionLink(Product product,
-                             ProductOptionGroup productOptionGroup,
-                             int seq) {
+    public ProductTimetable(Product product,
+    DayCode dayCode,
+    YesOrNo deleteYn) {
         this.product = product;
-        this.productOptionGroup = productOptionGroup;
-        this.seq = seq;
+        this.dayCode = dayCode;
+        this.deleteYn = deleteYn;
     }
 }

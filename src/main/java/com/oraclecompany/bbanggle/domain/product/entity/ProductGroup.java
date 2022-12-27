@@ -2,6 +2,7 @@ package com.oraclecompany.bbanggle.domain.product.entity;
 
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
+import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +12,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ProductOptionGroup extends BaseEntity {
+public class ProductGroup extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     @Column(nullable = false)
     private String name;
@@ -25,21 +29,10 @@ public class ProductOptionGroup extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private YesOrNo deleteYn;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private YesOrNo multiCheckYn;
-
-    @Column
-    private int maxCheckCount;
-
     @Builder
-    public ProductOptionGroup (String name,
-                               YesOrNo deleteYn,
-                               YesOrNo multiCheckYn,
-                               int maxCheckCount) {
+    private ProductGroup(String name,
+                         YesOrNo deleteYn) {
         this.name = name;
         this.deleteYn = deleteYn;
-        this.multiCheckYn = multiCheckYn;
-        this.maxCheckCount = maxCheckCount;
     }
 }

@@ -2,6 +2,7 @@ package com.oraclecompany.bbanggle.domain.product.entity;
 
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
+import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,35 +12,40 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ProductOptionGroup extends BaseEntity {
+public class StoreTimeGroup extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private YesOrNo deleteYn;
+    private int seq;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private YesOrNo multiCheckYn;
+    private YesOrNo openYn;
 
-    @Column
-    private int maxCheckCount;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private YesOrNo deleteYn;
 
     @Builder
-    public ProductOptionGroup (String name,
-                               YesOrNo deleteYn,
-                               YesOrNo multiCheckYn,
-                               int maxCheckCount) {
+    public StoreTimeGroup(Store store,
+                          String name,
+                          int seq,
+                          YesOrNo openYn,
+                          YesOrNo deleteYn) {
+        this.store = store;
         this.name = name;
+        this.seq = seq;
+        this.openYn = openYn;
         this.deleteYn = deleteYn;
-        this.multiCheckYn = multiCheckYn;
-        this.maxCheckCount = maxCheckCount;
     }
 }

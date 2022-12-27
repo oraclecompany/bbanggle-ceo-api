@@ -2,7 +2,6 @@ package com.oraclecompany.bbanggle.domain.product.entity;
 
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
-import com.oraclecompany.bbanggle.domain.product.constant.DayCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,30 +11,35 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ProductOptionLink extends BaseEntity {
+public class ProductGroupLink extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_group_id")
+    private ProductGroup productGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_option_group_id")
-    private ProductOptionGroup productOptionGroup;
-
     @Column(nullable = false)
     private int seq;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private YesOrNo deleteYn;
+
     @Builder
-    public ProductOptionLink(Product product,
-                             ProductOptionGroup productOptionGroup,
-                             int seq) {
+    private ProductGroupLink(ProductGroup productGroup,
+                             Product product,
+                             int seq,
+                             YesOrNo deleteYn) {
+        this.productGroup = productGroup;
         this.product = product;
-        this.productOptionGroup = productOptionGroup;
         this.seq = seq;
+        this.deleteYn = deleteYn;
     }
 }

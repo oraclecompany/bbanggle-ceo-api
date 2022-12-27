@@ -1,5 +1,7 @@
 package com.oraclecompany.bbanggle.domain.product.entity;
 
+import com.oraclecompany.bbanggle.domain.common.BaseEntity;
+import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-public class ProductOptionItem {
+public class ProductOptionItem extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,23 +22,25 @@ public class ProductOptionItem {
     @JoinColumn(name = "product_option_group_id")
     private ProductOptionGroup productOptionGroup;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "price", nullable = false)
+    @Column(nullable = false)
     private Long price;
 
-    @Column(name = "seq", nullable = false)
+    @Column(nullable = false)
     private int seq;
 
-    @Column(name = "status", nullable = false)
+    @Column(nullable = false)
     private String status;
 
-    @Column(name = "hiddenYn", nullable = false)
-    private char hiddenYn;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private YesOrNo hiddenYn;
 
-    @Column(name = "deleteYn", nullable = false)
-    private char deleteYn;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private YesOrNo deleteYn;
 
     @Builder
     public ProductOptionItem (ProductOptionGroup productOptionGroup,
@@ -44,8 +48,8 @@ public class ProductOptionItem {
                               Long price,
                               int seq,
                               String status,
-                              char hiddenYn,
-                              char deleteYn) {
+                              YesOrNo hiddenYn,
+                              YesOrNo deleteYn) {
         this.productOptionGroup = productOptionGroup;
         this.name = name;
         this.price = price;
