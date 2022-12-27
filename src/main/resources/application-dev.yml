@@ -1,5 +1,4 @@
 spring:
-
   datasource:
     url: jdbc:mysql://bbanggle-dev-db.cehfb4mzdov6.ap-northeast-2.rds.amazonaws.com:3306/bbanggle?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: admin
@@ -8,4 +7,4 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
