@@ -22,9 +22,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public Page<ProductGroupLink> selectProductList(Pageable pageable, Store store) {
-
         List<Product> productList = productRepository.findByStore(store);
-
         return productGroupLinkRepository.findByProduct(pageable, productList);
     }
 }

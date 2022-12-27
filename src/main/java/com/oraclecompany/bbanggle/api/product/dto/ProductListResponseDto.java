@@ -15,7 +15,6 @@ public class ProductListResponseDto {
 
     //상품그룹명(카테고리)
     private String ProductGroupName;
-//    private ProductGroup productGroup;
 
     //상품식별자
     private Long id;

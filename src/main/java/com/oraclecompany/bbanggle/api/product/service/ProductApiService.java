@@ -25,9 +25,7 @@ public class ProductApiService {
     private final StoreService storeService;
 
     public List<ProductListResponseDto> selectProductList(Pageable pageable, Long storeId) {
-        //TODO 여기에 스토어 서비스 만들기
         Store store = storeService.selectStore(storeId);
-
         Page<ProductGroupLink> productList = productService.selectProductList(pageable, store);
 
         return productList.stream()

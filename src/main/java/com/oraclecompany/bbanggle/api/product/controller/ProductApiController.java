@@ -14,16 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/products")
+@RequestMapping("/api/mm")
 @RestController
 public class ProductApiController {
 
     private final ProductApiService productApiService;
 
     @ApiOperation(value = "상품 목록 조회 api", notes = "상품 목록 조회")
-    @GetMapping("/list")
-    public ResponseEntity<List<ProductListResponseDto>> getProductList(@RequestParam("id") Long id, Pageable pageable) {
-
-        return ResponseEntity.ok(productApiService.selectProductList(pageable, id));
+    @GetMapping("/products")
+    public ResponseEntity<List<ProductListResponseDto>> getProductList(Pageable pageable) {
+        return ResponseEntity.ok(productApiService.selectProductList(pageable));
     }
 }
