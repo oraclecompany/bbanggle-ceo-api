@@ -37,4 +37,11 @@ public class ProductApiService {
         Product findProduct = productService.findProduct(productId);
         findProduct.modifyQuantity(productQuantityUpdateDto.getQuantity());
     }
+
+    public void updateProductQuantityPlus(Long productId) {
+        Product findProduct = productService.findProduct(productId);
+        findProduct.plusQuantity(findProduct.getQuantity());
+    }
+
+
 }

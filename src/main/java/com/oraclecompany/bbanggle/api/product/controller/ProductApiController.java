@@ -35,4 +35,14 @@ public class ProductApiController {
         productApiService.updateProductQuantity(productId, productQuantityUpdateDto);
         return ResponseEntity.ok("수량이 변경되었습니다.");
     }
+
+    @ApiOperation(value = "상품 수량 증가 api", notes = "상품 수량 증가")
+    @PatchMapping("/products/{productId}/quantity/plus")
+    public ResponseEntity<String> updateProductQuantityPlus(
+            @PathVariable("productId") Long productId) {
+        productApiService.updateProductQuantityPlus(productId);
+        return ResponseEntity.ok("수량이 증가되었습니다.");
+    }
+
+
 }

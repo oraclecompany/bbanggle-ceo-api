@@ -81,4 +81,8 @@ public class Product extends BaseEntity {
     public void modifyQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public void plusQuantity(int quantity) {
+        this.quantity = quantity + 1;
+    }
 }
