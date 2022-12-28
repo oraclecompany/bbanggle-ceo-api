@@ -22,4 +22,8 @@ public class CeoService {
         ceoRepository.save(ceo);
         return ceo;
     }
+
+    public Ceo findCeoById(Long id) {
+        return ceoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
+    }
 }

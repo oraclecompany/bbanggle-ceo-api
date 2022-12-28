@@ -1,11 +1,12 @@
 package com.oraclecompany.bbanggle.global.config.web;
 
-import com.oraclecompany.bbanggle.memberinfo.MemberInfoArgumentResolver;
+import com.oraclecompany.bbanggle.memberinfo.CeoInfoArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final MemberInfoArgumentResolver memberInfoArgumentResolver;
+    private final CeoInfoArgumentResolver ceoInfoArgumentResolver;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -31,6 +32,11 @@ public class WebConfig implements WebMvcConfigurer {
                         HttpMethod.OPTIONS.name()
                 )
                 .maxAge(3000);
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(ceoInfoArgumentResolver);
     }
 
     @Override

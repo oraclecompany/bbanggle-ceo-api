@@ -42,34 +42,6 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String generateToken(UserDetailsImpl userDetails) {
-
-        Map<String, Object> claims = new HashMap<>();
-
-        val isAdmin = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_"+ Role.ROLE_ADMIN));
-        if (isAdmin) {
-            claims.put("role","admin");
-        } else {
-            claims.put("role","user");
-        }
-
-        val myName = userDetails.getName();
-        claims.put("myName", myName);
-
-        return doGenerateToken(claims, userDetails.getUsername());
-    }
-
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder()
-                .setHeaderParam("typ","JWT")
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + tokenValidTime * 1000))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
-                .compact();
-    }
-
     // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
@@ -78,7 +50,7 @@ public class JwtTokenProvider {
 
     // 토큰에서 회원 정보 추출
     public String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("memberId").toString();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("loginId").toString();
     }
 
     // Request의 Header에서 token 값을 가져옴.

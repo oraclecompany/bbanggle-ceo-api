@@ -1,8 +1,11 @@
-package com.oraclecompany.bbanggle.api.product.controller;
+package com.oraclecompany.bbanggle.api.menu.controller;
 
-import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
-import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
-import com.oraclecompany.bbanggle.api.product.service.ProductApiService;
+import com.oraclecompany.bbanggle.api.menu.dto.ProductListDto;
+import com.oraclecompany.bbanggle.api.menu.dto.ProductQuantityUpdateDto;
+import com.oraclecompany.bbanggle.api.menu.service.MenuApiService;
+import com.oraclecompany.bbanggle.memberinfo.CeoInfoDto;
+import com.oraclecompany.bbanggle.memberinfo.CeoInfo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -15,15 +18,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/mm")
 @RestController
-public class ProductApiController {
+@Api(value = "메뉴관리 화면", tags = "메뉴관리 화면")
+public class ManuApiController {
 
-    private final ProductApiService productApiService;
+    private final MenuApiService menuApiService;
 
     @ApiOperation(value = "상품 목록 조회 api", notes = "상품 목록 조회")
     @GetMapping("/products")
-    public ResponseEntity<List<ProductListResponseDto>> getProductList(@RequestParam("id") Long id, Pageable pageable) {
-
-        return ResponseEntity.ok(productApiService.selectProductList(pageable, id));
+    public ResponseEntity<List<ProductListDto.Response>> getProductList(
+            Pageable pageable,
+            @CeoInfo CeoInfoDto ceoInfoDto
+    ) {
+        return ResponseEntity.ok(menuApiService.getProductList(pageable, ceoInfoDto));
     }
 
     @ApiOperation(value = "상품 수량 변경 api", notes = "상품 수량 변경")
@@ -31,7 +37,7 @@ public class ProductApiController {
     public ResponseEntity<String> updateProductQuantity(
             @RequestBody @Valid ProductQuantityUpdateDto productQuantityUpdateDto,
             @PathVariable("productId") Long productId) {
-        productApiService.updateProductQuantity(productId, productQuantityUpdateDto);
+        menuApiService.updateProductQuantity(productId, productQuantityUpdateDto);
         return ResponseEntity.ok("수량이 변경되었습니다.");
     }
 
@@ -39,7 +45,7 @@ public class ProductApiController {
     @PatchMapping("/products/{productId}/quantity/plus")
     public ResponseEntity<String> updateProductQuantityPlus(
             @PathVariable("productId") Long productId) {
-        productApiService.updateProductQuantityPlus(productId);
+        menuApiService.updateProductQuantityPlus(productId);
         return ResponseEntity.ok("수량이 증가되었습니다.");
     }
 
@@ -47,7 +53,7 @@ public class ProductApiController {
     @PatchMapping("/products/{productId}/quantity/minus")
     public ResponseEntity<String> updateProductQuantityMinus(
             @PathVariable("productId") Long productId) {
-        productApiService.updateProductQuantityMinus(productId);
+        menuApiService.updateProductQuantityMinus(productId);
         return ResponseEntity.ok("수량이 감소되었습니다.");
     }
 
@@ -55,7 +61,7 @@ public class ProductApiController {
     @PatchMapping("/products/{productId}/status")
     public ResponseEntity<String> updateProductSellStatus(
             @PathVariable("productId") Long productId) {
-        productApiService.updateProductSellStatus(productId);
+        menuApiService.updateProductSellStatus(productId);
         return ResponseEntity.ok("상품 품절 상태가 변경되었습니다.");
     }
 }
