@@ -22,9 +22,9 @@ public class SignupDto {
         @ApiModelProperty(value = "비밀번호", example = "a1234")
         private String password;
         @ApiModelProperty(value = "상태", example = "NORMAL")
-        private CeoStatus status;
+        private CeoStatus ceoStatus;
         @ApiModelProperty(value = "타입", example = "GENERAL")
-        private CeoType type;
+        private CeoType ceoType;
         @ApiModelProperty(value = "전화번호", example = "01012345678")
         private String tel;
     }

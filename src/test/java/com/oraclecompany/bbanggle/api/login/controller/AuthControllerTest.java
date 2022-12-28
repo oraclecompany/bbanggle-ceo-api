@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.api.login.controller;
 
-import com.oraclecompany.bbanggle.api.login.service.LoginService;
+import com.oraclecompany.bbanggle.api.login.service.LoginApiService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ class AuthControllerTest {
     MockMvc mockMvc;
 
     @Autowired
-    LoginService authService;
+    LoginApiService authService;
 
     @Test
     @WithAnonymousUser

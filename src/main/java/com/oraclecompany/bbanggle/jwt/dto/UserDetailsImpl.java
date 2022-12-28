@@ -65,4 +65,8 @@ public class UserDetailsImpl implements UserDetails {
     public Role getRole() {
         return ceo.getRole();
     }
+
+    public String getLoginId() {
+        return ceo.getLoginId();
+    }
 }
