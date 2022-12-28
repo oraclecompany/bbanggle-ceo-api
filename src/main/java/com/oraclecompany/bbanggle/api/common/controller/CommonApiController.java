@@ -22,4 +22,6 @@ public class CommonApiController {
         commonApiService.modifyStoreStatus(storeStatusModifyDto);
         return ResponseEntity.ok("매장의 영업상태가 변경되었습니다.");
     }
+
+
 }

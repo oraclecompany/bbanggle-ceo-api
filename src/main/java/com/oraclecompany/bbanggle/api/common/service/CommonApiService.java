@@ -15,8 +15,11 @@ public class CommonApiService {
 
     private final StoreService storeService;
 
+    @Transactional
     public void modifyStoreStatus(StoreStatusModifyDto storeStatusModifyDto) {
         Store findStore = storeService.findStoreById(storeStatusModifyDto.getStoreId());
         findStore.modifyStatus(storeStatusModifyDto.getStoreStatus());
     }
+
+
 }
