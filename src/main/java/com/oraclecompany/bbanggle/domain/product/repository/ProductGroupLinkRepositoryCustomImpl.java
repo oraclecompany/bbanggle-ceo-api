@@ -16,7 +16,7 @@ import static com.oraclecompany.bbanggle.domain.product.entity.QProductTimetable
 
 public class ProductGroupLinkRepositoryCustomImpl implements ProductGroupLinkRepositoryCustom {
 
-    private JPAQueryFactory queryFactory;
+    private final JPAQueryFactory queryFactory;
 
     public ProductGroupLinkRepositoryCustomImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
@@ -26,8 +26,7 @@ public class ProductGroupLinkRepositoryCustomImpl implements ProductGroupLinkRep
     public Page<ProductGroupLink> findByProduct(Pageable pageable, List<Product> product) {
 
         List<ProductGroupLink> products = queryFactory
-                .select(productGroupLink)
-                .from(productGroupLink)
+                .selectFrom(productGroupLink)
                 .join(productGroupLink.product)
                 .join(productTimetable).on(productGroupLink.product.id.eq(productTimetable.product.id))
                 .where(productGroupLink.product.in(product))

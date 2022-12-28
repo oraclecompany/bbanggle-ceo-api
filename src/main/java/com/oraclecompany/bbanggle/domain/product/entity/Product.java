@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -54,6 +55,12 @@ public class Product extends BaseEntity {
 
     @Column
     private int defaultQuantity;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductGroupLink> productGroupLinks;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductTimetable> productTimetables;
 
     @Builder
     public Product(String name,

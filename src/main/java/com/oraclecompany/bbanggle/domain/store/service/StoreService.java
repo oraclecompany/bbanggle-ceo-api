@@ -13,7 +13,7 @@ public class StoreService {
 
     private final StoreRepository storeRepository;
 
-    public Store selectStore(Long storeId) {
+    public Store findStoreById(Long storeId) {
 
             return storeRepository.findById(storeId).orElseThrow(() -> new IllegalArgumentException("해당 스토어가 없습니다. id=" + storeId));
     }

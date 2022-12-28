@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @Component
-public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver {
+public class CeoInfoArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final TokenManager tokenManager;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        boolean hasMemberInfoAnnotation = parameter.hasParameterAnnotation(MemberInfo.class);
+        boolean hasMemberInfoAnnotation = parameter.hasParameterAnnotation(CeoInfo.class);
         boolean hasMemberInfoDto = CeoInfoDto.class.isAssignableFrom(parameter.getParameterType());
         return hasMemberInfoAnnotation && hasMemberInfoDto;
     }
@@ -32,7 +32,7 @@ public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver
         String authorizationHeader = request.getHeader("Authorization");
         String accessToken = authorizationHeader.split(" ")[1];
         Claims tokenClaims = tokenManager.getTokenClaims(accessToken);
-        Long ceoId = Long.valueOf((Integer)tokenClaims.get("memberId"));
+        Long ceoId = Long.valueOf((Integer)tokenClaims.get("ceoId"));
         String role = (String)tokenClaims.get("role");
 
         return CeoInfoDto.builder()

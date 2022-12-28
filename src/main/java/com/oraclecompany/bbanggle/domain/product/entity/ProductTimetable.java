@@ -3,11 +3,13 @@ package com.oraclecompany.bbanggle.domain.product.entity;
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
 import com.oraclecompany.bbanggle.domain.product.constant.DayCode;
+import com.oraclecompany.bbanggle.domain.product.constant.DayType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Time;
 
 @NoArgsConstructor
 @Getter
@@ -31,12 +33,21 @@ public class ProductTimetable extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private YesOrNo deleteYn;
 
+    private Time hhmm;
+
+    @Enumerated(EnumType.STRING)
+    private DayType dayType;
+
     @Builder
     public ProductTimetable(Product product,
-    DayCode dayCode,
-    YesOrNo deleteYn) {
+                            DayCode dayCode,
+                            Time hhmm,
+                            DayType dayType,
+                            YesOrNo deleteYn) {
         this.product = product;
         this.dayCode = dayCode;
+        this.hhmm = hhmm;
+        this.dayType = dayType;
         this.deleteYn = deleteYn;
     }
 }

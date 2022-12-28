@@ -33,10 +33,12 @@ public class Ceo extends BaseEntity {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private CeoType type;
+    @Column(name = "type")
+    private CeoType ceoType;
 
     @Enumerated(EnumType.STRING)
-    private CeoStatus status;
+    @Column(name = "status")
+    private CeoStatus ceoStatus;
 
     private String tel;
 
@@ -49,8 +51,8 @@ public class Ceo extends BaseEntity {
         this.loginId = request.getLoginId();
         this.email = request.getEmail();
         this.password = request.getPassword();
-        this.status = request.getStatus();
-        this.type = request.getType();
+        this.ceoStatus = request.getCeoStatus();
+        this.ceoType = request.getCeoType();
         this.tel = request.getTel();
         this.role = Role.ROLE_USER;
     }

@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @AllArgsConstructor
-public class LoginService {
+public class LoginApiService {
     private final CeoService ceoService;
 
     private final AuthenticationManager authenticationManager;
@@ -38,7 +38,7 @@ public class LoginService {
     private JwtTokenDto createJwtToken(Authentication authentication) {
         try {
             UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
-            return tokenManager.createJwtTokenDto(principal.getId(), principal.getRole());
+            return tokenManager.createJwtTokenDto(principal.getId(), principal.getRole(), principal.getLoginId());
         } catch (Exception e) {
             return new JwtTokenDto(e.getMessage());
         }

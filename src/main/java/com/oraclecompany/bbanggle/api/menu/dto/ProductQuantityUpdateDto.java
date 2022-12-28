@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.api.product.dto;
+package com.oraclecompany.bbanggle.api.menu.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

@@ -1,15 +1,17 @@
-package com.oraclecompany.bbanggle.api.product.service;
+package com.oraclecompany.bbanggle.api.menu.service;
 
-import com.oraclecompany.bbanggle.api.product.dto.ProductListResponseDto;
-import com.oraclecompany.bbanggle.api.product.dto.ProductQuantityUpdateDto;
+import com.oraclecompany.bbanggle.api.menu.dto.ProductListDto;
+import com.oraclecompany.bbanggle.api.menu.dto.ProductQuantityUpdateDto;
+import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
+import com.oraclecompany.bbanggle.domain.ceo.service.CeoService;
 import com.oraclecompany.bbanggle.domain.product.constant.SellStatus;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
-import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
 import com.oraclecompany.bbanggle.domain.product.service.ProductService;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.domain.store.service.StoreService;
 import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
 import com.oraclecompany.bbanggle.global.error.exception.InvalidValueException;
+import com.oraclecompany.bbanggle.memberinfo.CeoInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,16 +23,19 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class ProductApiService {
+public class MenuApiService {
 
     private final ProductService productService;
     private final StoreService storeService;
+    private final CeoService ceoService;
 
-    public List<ProductListResponseDto> selectProductList(Pageable pageable, Long storeId) {
-        Store store = storeService.selectStore(storeId);
-        Page<ProductGroupLink> productList = productService.selectProductList(pageable, store);
+    public List<ProductListDto.Response> getProductList(Pageable pageable, CeoInfoDto ceoInfoDto) {
+        Ceo findCeo = ceoService.findCeoById(ceoInfoDto.getCeoId());
+        Store store = storeService.findStoreById(findCeo.getStoreId());
+        Page<Product> productList = productService.findProductList(pageable, store);
+
         return productList.stream()
-                .map(ProductListResponseDto::of)
+                .map(ProductListDto.Response::of)
                 .toList();
     }
 
@@ -46,7 +51,7 @@ public class ProductApiService {
 
     public void updateProductQuantityMinus(Long productId) {
         Product findProduct = productService.findProduct(productId);
-        if(findProduct.getQuantity() == 0) {
+        if (findProduct.getQuantity() == 0) {
             throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
         }
         findProduct.minusQuantity();
@@ -55,7 +60,7 @@ public class ProductApiService {
     public void updateProductSellStatus(Long productId) {
         Product findProduct = productService.findProduct(productId);
 
-        if(findProduct.getStatus() == SellStatus.SL) {
+        if (findProduct.getStatus() == SellStatus.SL) {
             findProduct.updateStatus(SellStatus.SO);
         } else {
             findProduct.updateStatus(SellStatus.SL);
