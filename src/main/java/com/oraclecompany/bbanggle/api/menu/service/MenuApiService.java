@@ -26,12 +26,11 @@ import java.util.List;
 public class MenuApiService {
 
     private final ProductService productService;
-    private final StoreService storeService;
     private final CeoService ceoService;
 
     public List<ProductListDto.Response> getProductList(Pageable pageable, CeoInfoDto ceoInfoDto) {
         Ceo findCeo = ceoService.findCeoById(ceoInfoDto.getCeoId());
-        Store store = storeService.findStoreById(findCeo.getStoreId());
+        Store store = findCeo.getStore();
         Page<Product> productList = productService.findProductList(pageable, store);
 
         return productList.stream()

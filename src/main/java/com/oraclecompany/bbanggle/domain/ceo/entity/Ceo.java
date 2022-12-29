@@ -5,6 +5,7 @@ import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoStatus;
 import com.oraclecompany.bbanggle.domain.ceo.constant.CeoType;
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
+import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,11 @@ import javax.persistence.*;
 public class Ceo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
-    private  Long storeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     private String name;
 
@@ -47,7 +50,6 @@ public class Ceo extends BaseEntity {
 
     public Ceo(SignupDto.Request request) {
         this.name = request.getName();
-        this.storeId = request.getStoreId();
         this.loginId = request.getLoginId();
         this.email = request.getEmail();
         this.password = request.getPassword();

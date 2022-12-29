@@ -2,7 +2,6 @@ package com.oraclecompany.bbanggle.domain.product.repository;
 
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductGroupLink;
-import com.oraclecompany.bbanggle.domain.product.entity.QProductTimetable;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

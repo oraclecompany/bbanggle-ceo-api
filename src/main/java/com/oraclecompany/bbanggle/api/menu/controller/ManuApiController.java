@@ -27,8 +27,7 @@ public class ManuApiController {
     @GetMapping("/products")
     public ResponseEntity<List<ProductListDto.Response>> getProductList(
             Pageable pageable,
-            @CeoInfo CeoInfoDto ceoInfoDto
-    ) {
+            @CeoInfo CeoInfoDto ceoInfoDto) {
         return ResponseEntity.ok(menuApiService.getProductList(pageable, ceoInfoDto));
     }
 

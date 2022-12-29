@@ -68,6 +68,8 @@ public class ProductListDto {
     @Setter
     public static class ProductTimetableDto {
 
+        @ApiModelProperty(value = "상품 시간표 ID", example = "1")
+        private Long productTimetableId;
         @ApiModelProperty(value = "요일코드", example = "MON", dataType = "DayCode")
         private DayCode dayCode;
         @ApiModelProperty(value = "요일코드 설명", example = "월요일")
@@ -82,6 +84,7 @@ public class ProductListDto {
         @Builder
         public static ProductTimetableDto of(ProductTimetable productTimeTable) {
             return ProductTimetableDto.builder()
+                    .productTimetableId(productTimeTable.getId())
                     .dayCode(productTimeTable.getDayCode())
                     .dayCodeDesc(productTimeTable.getDayCode().getDescription())
                     .dayType(productTimeTable.getDayType())
