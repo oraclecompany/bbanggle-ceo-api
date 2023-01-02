@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.global.config.web;
 
-import com.oraclecompany.bbanggle.memberinfo.CeoInfoArgumentResolver;
+import com.oraclecompany.bbanggle.global.resolver.ceoinfo.CeoInfoArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

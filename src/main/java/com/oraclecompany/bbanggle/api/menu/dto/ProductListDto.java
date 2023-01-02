@@ -43,12 +43,6 @@ public class ProductListDto {
         public static Response of(Product product) {
             return Response.builder()
                     .productId(product.getId())
-                    .ProductGroupList(
-                            product.getProductGroupLinks()
-                                    .stream()
-                                    .map(productGroupLink -> ProductGroupDto.of(productGroupLink.getProductGroup()))
-                                    .toList()
-                    )
                     .productName(product.getName())
                     .price(product.getPrice())
                     .quantity(product.getQuantity())

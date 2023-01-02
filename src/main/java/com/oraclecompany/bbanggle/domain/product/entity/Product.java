@@ -57,9 +57,6 @@ public class Product extends BaseEntity {
     private int defaultQuantity;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductGroupLink> productGroupLinks;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductTimetable> productTimetables;
 
     @Builder

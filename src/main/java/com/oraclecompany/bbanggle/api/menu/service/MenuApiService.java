@@ -11,7 +11,7 @@ import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.domain.store.service.StoreService;
 import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
 import com.oraclecompany.bbanggle.global.error.exception.InvalidValueException;
-import com.oraclecompany.bbanggle.memberinfo.CeoInfoDto;
+import com.oraclecompany.bbanggle.global.resolver.ceoinfo.CeoInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

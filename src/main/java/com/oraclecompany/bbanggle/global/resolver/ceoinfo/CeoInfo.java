@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.memberinfo;
+package com.oraclecompany.bbanggle.global.resolver.ceoinfo;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

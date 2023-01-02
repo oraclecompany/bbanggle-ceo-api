@@ -1,7 +1,6 @@
-package com.oraclecompany.bbanggle.global.config;
+package com.oraclecompany.bbanggle.global.config.security;
 
-import com.oraclecompany.bbanggle.jwt.service.JwtAuthenticationFilter;
-import com.oraclecompany.bbanggle.jwt.service.JwtTokenProvider;
+import com.oraclecompany.bbanggle.global.jwt.service.JwtTokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

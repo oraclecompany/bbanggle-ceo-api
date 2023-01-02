@@ -4,9 +4,9 @@ import com.oraclecompany.bbanggle.api.login.dto.JwtRequestDto;
 import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
 import com.oraclecompany.bbanggle.domain.ceo.service.CeoService;
-import com.oraclecompany.bbanggle.jwt.dto.JwtTokenDto;
-import com.oraclecompany.bbanggle.jwt.service.TokenManager;
-import com.oraclecompany.bbanggle.jwt.dto.UserDetailsImpl;
+import com.oraclecompany.bbanggle.global.jwt.dto.JwtTokenDto;
+import com.oraclecompany.bbanggle.global.jwt.service.TokenManager;
+import com.oraclecompany.bbanggle.global.config.security.UserDetailsImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +38,7 @@ public class LoginApiService {
     private JwtTokenDto createJwtToken(Authentication authentication) {
         try {
             UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
-            return tokenManager.createJwtTokenDto(principal.getId(), principal.getRole(), principal.getLoginId());
+            return tokenManager.createJwtTokenDto(principal.getCeoId(), principal.getRole(), principal.getLoginId());
         } catch (Exception e) {
             return new JwtTokenDto(e.getMessage());
         }

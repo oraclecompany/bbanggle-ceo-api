@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.jwt.dto;
+package com.oraclecompany.bbanggle.global.config.security;
 
 import com.oraclecompany.bbanggle.api.login.constant.Role;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
@@ -12,6 +12,7 @@ import java.util.Collection;
 
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
+
     private final Ceo ceo;
 
     @Override
@@ -31,7 +32,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return ceo.getName();
+        return ceo.getLoginId();
     }
 
     @Override
@@ -54,11 +55,7 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public String getName() {
-        return ceo.getName();
-    }
-
-    public Long getId() {
+    public Long getCeoId() {
         return ceo.getId();
     }
 

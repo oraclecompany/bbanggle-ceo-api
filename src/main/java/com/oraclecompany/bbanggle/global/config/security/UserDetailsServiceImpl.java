@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.jwt.dto;
+package com.oraclecompany.bbanggle.global.config.security;
 
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;
 import com.oraclecompany.bbanggle.domain.ceo.repository.CeoRepository;

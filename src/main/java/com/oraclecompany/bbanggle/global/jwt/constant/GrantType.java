@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.jwt.constant;
+package com.oraclecompany.bbanggle.global.jwt.constant;
 
 import lombok.Getter;
 

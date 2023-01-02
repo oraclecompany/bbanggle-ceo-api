@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.jwt.dto;
+package com.oraclecompany.bbanggle.global.jwt.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -10,12 +10,19 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccessTokenDto {
-
-    private String grantType;
+public class JwtTokenDto {
 
     private String accessToken;
 
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
     private Date accessTokenExpireTime;
+
+    private String refreshToken;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
+    private Date refreshTokenExpireTime;
+
+    public JwtTokenDto(String message) {
+
+    }
 }

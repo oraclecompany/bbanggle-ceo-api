@@ -20,9 +20,9 @@ import javax.persistence.*;
 public class Ceo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
-    private  Long storeId;
+    private Long storeId;
 
     private String name;
 
