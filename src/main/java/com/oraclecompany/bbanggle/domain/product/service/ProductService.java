@@ -1,7 +1,6 @@
 package com.oraclecompany.bbanggle.domain.product.service;
 
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
-import com.oraclecompany.bbanggle.domain.product.repository.ProductGroupLinkRepository;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductRepository;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.global.error.exception.EntityNotFoundException;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductService {
 
-    private final ProductGroupLinkRepository productGroupLinkRepository;
     private final ProductRepository productRepository;
 
     public Page<Product> findProductList(Pageable pageable, Store store) {

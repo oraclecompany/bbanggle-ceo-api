@@ -22,8 +22,9 @@ public class ProductGroup extends BaseEntity {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @Column(nullable = false)
     private String name;
+
+    private int seq;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

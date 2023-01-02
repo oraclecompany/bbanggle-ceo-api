@@ -25,7 +25,7 @@ public class ProductListDto {
         @ApiModelProperty(value = "상품 ID", example = "1")
         private Long productId;
         @ApiModelProperty(value = "상품 그룹 리스트")
-        private List<ProductGroupDto> ProductGroupList;
+        private String ProductGroupName;
         @ApiModelProperty(value = "상품 이름", example = "상품A")
         private String productName;
         @ApiModelProperty(value = "상품 가격", example = "10000")
@@ -34,8 +34,10 @@ public class ProductListDto {
         private int quantity;
         @ApiModelProperty(value = "상품 판매 상태", example = "SL", dataType = "SellStatus")
         private SellStatus sellStatus;
-        @ApiModelProperty(value = "상품 숨김 여부", example = "N" , dataType = "YesOrNo")
+        @ApiModelProperty(value = "상품 숨김 여부", example = "N", dataType = "YesOrNo")
         private YesOrNo hiddenYn;
+        @ApiModelProperty(value = "상품 시그니처 여부", example = "N", dataType = "YesOrNo")
+        private YesOrNo signatureYn;
         @ApiModelProperty(value = "상품 시간표 리스트")
         private List<ProductTimetableDto> productTimeTableList;
 
@@ -43,17 +45,13 @@ public class ProductListDto {
         public static Response of(Product product) {
             return Response.builder()
                     .productId(product.getId())
-                    .ProductGroupList(
-                            product.getProductGroupLinks()
-                                    .stream()
-                                    .map(productGroupLink -> ProductGroupDto.of(productGroupLink.getProductGroup()))
-                                    .toList()
-                    )
+                    .ProductGroupName(product.getProductGroup() != null ? product.getProductGroup().getName() : "")
                     .productName(product.getName())
                     .price(product.getPrice())
                     .quantity(product.getQuantity())
                     .sellStatus(product.getStatus())
                     .hiddenYn(product.getHiddenYn())
+                    .signatureYn(product.getSignatureYn())
                     .productTimeTableList(
                             product.getProductTimetables()
                                     .stream()
@@ -73,7 +71,7 @@ public class ProductListDto {
         @ApiModelProperty(value = "요일코드", example = "MON", dataType = "DayCode")
         private DayCode dayCode;
         @ApiModelProperty(value = "요일코드 설명", example = "월요일")
-        private String  dayCodeDesc;
+        private String dayCodeDesc;
         @ApiModelProperty(value = "시간유형", example = "AM", dataType = "DayType")
         private DayType dayType;
         @ApiModelProperty(value = "시간유형 설명", example = "오전")
