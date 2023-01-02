@@ -1,7 +1,7 @@
-package com.oraclecompany.bbanggle.memberinfo;
+package com.oraclecompany.bbanggle.global.resolver.ceoinfo;
 
 import com.oraclecompany.bbanggle.api.login.constant.Role;
-import com.oraclecompany.bbanggle.jwt.service.TokenManager;
+import com.oraclecompany.bbanggle.global.jwt.service.TokenManager;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;

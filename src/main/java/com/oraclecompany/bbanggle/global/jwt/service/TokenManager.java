@@ -1,11 +1,11 @@
-package com.oraclecompany.bbanggle.jwt.service;
+package com.oraclecompany.bbanggle.global.jwt.service;
 
 import com.oraclecompany.bbanggle.api.login.constant.Role;
 import com.oraclecompany.bbanggle.global.error.exception.AuthenticationException;
 import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
 import com.oraclecompany.bbanggle.global.error.exception.NotValidTokenException;
-import com.oraclecompany.bbanggle.jwt.constant.TokenType;
-import com.oraclecompany.bbanggle.jwt.dto.JwtTokenDto;
+import com.oraclecompany.bbanggle.global.jwt.dto.JwtTokenDto;
+import com.oraclecompany.bbanggle.global.jwt.constant.TokenType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -30,12 +30,12 @@ public class TokenManager {
     @Value("${token.secret}")
     private String tokenSecret;
 
-    public JwtTokenDto createJwtTokenDto(Long memberId, Role role, String loginId) {
+    public JwtTokenDto createJwtTokenDto(Long ceoId, Role role, String loginId) {
         Date accessTokenExpireTime = createAccessTokenExpireTime();
         Date refreshTokenExpireTime = createRefreshTokenExpireTime();
 
-        String accessToken = createAccessToken(memberId, role, loginId, accessTokenExpireTime);
-        String refreshToken = createRefreshToken(memberId, refreshTokenExpireTime);
+        String accessToken = createAccessToken(ceoId, role, loginId, accessTokenExpireTime);
+        String refreshToken = createRefreshToken(ceoId, refreshTokenExpireTime);
 
         return JwtTokenDto.builder()
                 .accessToken(accessToken)

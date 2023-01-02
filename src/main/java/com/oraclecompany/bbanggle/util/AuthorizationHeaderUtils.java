@@ -2,7 +2,7 @@ package com.oraclecompany.bbanggle.util;
 
 import com.oraclecompany.bbanggle.global.error.exception.AuthenticationException;
 import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
-import com.oraclecompany.bbanggle.jwt.constant.GrantType;
+import com.oraclecompany.bbanggle.global.jwt.constant.GrantType;
 import org.springframework.util.StringUtils;
 
 public class AuthorizationHeaderUtils {

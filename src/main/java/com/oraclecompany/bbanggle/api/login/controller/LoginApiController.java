@@ -3,7 +3,7 @@ package com.oraclecompany.bbanggle.api.login.controller;
 import com.oraclecompany.bbanggle.api.login.dto.SignupDto;
 import com.oraclecompany.bbanggle.api.login.dto.JwtRequestDto;
 import com.oraclecompany.bbanggle.api.login.service.LoginApiService;
-import com.oraclecompany.bbanggle.jwt.dto.JwtTokenDto;
+import com.oraclecompany.bbanggle.global.jwt.dto.JwtTokenDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

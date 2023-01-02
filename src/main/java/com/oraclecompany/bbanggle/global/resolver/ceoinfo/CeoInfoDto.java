@@ -1,4 +1,4 @@
-package com.oraclecompany.bbanggle.memberinfo;
+package com.oraclecompany.bbanggle.global.resolver.ceoinfo;
 
 import com.oraclecompany.bbanggle.api.login.constant.Role;
 import com.oraclecompany.bbanggle.domain.ceo.entity.Ceo;

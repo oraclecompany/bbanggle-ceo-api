@@ -1,5 +1,6 @@
-package com.oraclecompany.bbanggle.jwt.service;
+package com.oraclecompany.bbanggle.global.config.security;
 
+import com.oraclecompany.bbanggle.global.jwt.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
