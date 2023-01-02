@@ -2,8 +2,10 @@ package com.oraclecompany.bbanggle.domain.product.service;
 
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionGroup;
+import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionItem;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionLink;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductOptionGroupRepository;
+import com.oraclecompany.bbanggle.domain.product.repository.ProductOptionItemRepository;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductOptionLinkRepository;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductRepository;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
@@ -24,6 +26,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductOptionGroupRepository productOptionGroupRepository;
+    private final ProductOptionItemRepository productOptionItemRepository;
 
     public Page<Product> findProductList(Pageable pageable, Store store) {
         return productRepository.findByStore(store, pageable);
@@ -45,5 +48,10 @@ public class ProductService {
 
     public ProductOptionGroup findProductOptionItemList(ProductOptionGroup productOptionGroup) {
         return productOptionGroupRepository.findByProductOptionGroup(productOptionGroup);
+    }
+
+    public ProductOptionItem findProductOptionItem(Long itemId) {
+        return productOptionItemRepository.findById(itemId)
+                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOT_EXIST_PRODUCT_OPTION_ITEM));
     }
 }

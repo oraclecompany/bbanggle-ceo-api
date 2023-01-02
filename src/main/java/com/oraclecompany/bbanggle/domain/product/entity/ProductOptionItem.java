@@ -61,4 +61,8 @@ public class ProductOptionItem extends BaseEntity {
         this.hiddenYn = hiddenYn;
         this.deleteYn = deleteYn;
     }
+
+    public void updateStatus(SellStatus status) {
+        this.status = status;
+    }
 }

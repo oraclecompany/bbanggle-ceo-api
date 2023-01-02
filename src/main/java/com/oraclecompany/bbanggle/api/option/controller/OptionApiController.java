@@ -4,16 +4,14 @@ import com.oraclecompany.bbanggle.api.option.dto.ProductOptionItemListResponseDt
 import com.oraclecompany.bbanggle.api.option.dto.ProductOptionListResponseDto;
 import com.oraclecompany.bbanggle.api.option.service.OptionApiService;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionItem;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,5 +42,11 @@ public class OptionApiController {
         return ResponseEntity.ok(productOptionItemListResponseDto);
     }
 
-
+    @ApiOperation(value = "상품 옵션 아이템 품절상태 변경 api", notes = "상품 옵션 아이템 품절상태 변경")
+    @PatchMapping("/products/options/{optionId}/items/{itemId}")
+    public ResponseEntity<String> updateProductOptionItemSellStatus(
+            @PathVariable("itemId") Long itemId) {
+        optionApiService.updateProductOptionItemSellStatus(itemId);
+        return ResponseEntity.ok("픔절 싱테기 뱐경되었습니다.");
+    }
 }

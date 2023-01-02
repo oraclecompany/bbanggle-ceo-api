@@ -33,6 +33,7 @@ public enum ErrorCode {
     NOT_EXIST_PRODUCT(HttpStatus.BAD_REQUEST, "P-001", "존재하지 않는 상품입니다."),
     INVALID_PRODUCT_QUANTITY(HttpStatus.BAD_REQUEST, "P-002", "수량의 범위는 0부터 99입니다."),
     NOT_EXIST_PRODUCT_OPTION(HttpStatus.BAD_REQUEST, "P-003", "존재하지 않는 상품옵션입니다."),
+    NOT_EXIST_PRODUCT_OPTION_ITEM(HttpStatus.BAD_REQUEST, "P-004", "존재하지 않는 상품하위옵션입니다."),
 
     // 상점,
     NOT_EXIST_STORE(HttpStatus.BAD_REQUEST, "S-001", "존재하지 않는 상점입니다.");
