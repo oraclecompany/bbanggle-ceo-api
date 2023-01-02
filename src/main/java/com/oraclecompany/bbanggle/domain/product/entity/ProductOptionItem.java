@@ -2,6 +2,7 @@ package com.oraclecompany.bbanggle.domain.product.entity;
 
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
+import com.oraclecompany.bbanggle.domain.product.constant.SellStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,8 @@ public class ProductOptionItem extends BaseEntity {
     private int seq;
 
     @Column(nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private SellStatus status;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -48,7 +50,7 @@ public class ProductOptionItem extends BaseEntity {
                               String name,
                               Long price,
                               int seq,
-                              String status,
+                              SellStatus status,
                               YesOrNo hiddenYn,
                               YesOrNo deleteYn) {
         this.productOptionGroup = productOptionGroup;

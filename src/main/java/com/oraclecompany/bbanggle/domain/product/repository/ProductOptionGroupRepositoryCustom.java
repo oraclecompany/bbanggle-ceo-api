@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface ProductOptionGroupRepositoryCustom {
     Page<ProductOptionGroup> findByStore(Pageable pageable, Store store);
+
+    ProductOptionGroup findByProductOptionGroup(ProductOptionGroup productOptionGroup);
 }

@@ -37,4 +37,13 @@ public class ProductService {
     public Page<ProductOptionGroup> findProductOptionList(Pageable pageable, Store store) {
         return productOptionGroupRepository.findByStore(pageable, store);
     }
+
+    public ProductOptionGroup findProductOptionGroupById(Long optionId) {
+        return productOptionGroupRepository.findById(optionId)
+                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOT_EXIST_PRODUCT_OPTION));
+    }
+
+    public ProductOptionGroup findProductOptionItemList(ProductOptionGroup productOptionGroup) {
+        return productOptionGroupRepository.findByProductOptionGroup(productOptionGroup);
+    }
 }

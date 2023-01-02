@@ -1,5 +1,6 @@
 package com.oraclecompany.bbanggle.api.option.dto;
 
+import com.oraclecompany.bbanggle.domain.product.constant.SellStatus;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionItem;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,8 @@ public class ProductOptionItemDto {
 
     private String productOptionGroupName;
 
+    private SellStatus status;
+
     public static ProductOptionItemDto of(ProductOptionItem productOptionItem) {
         return ProductOptionItemDto.builder()
                 .productOptionItemId(productOptionItem.getId())
@@ -30,6 +33,7 @@ public class ProductOptionItemDto {
                 .seq(productOptionItem.getSeq())
                 .productOptionGroupId(productOptionItem.getProductOptionGroup().getId())
                 .productOptionGroupName(productOptionItem.getProductOptionGroup().getName())
+                .status(productOptionItem.getStatus())
                 .build();
     }
 }

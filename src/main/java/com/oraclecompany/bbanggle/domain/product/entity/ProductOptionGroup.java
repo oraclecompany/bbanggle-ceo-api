@@ -3,6 +3,7 @@ package com.oraclecompany.bbanggle.domain.product.entity;
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 public class ProductOptionGroup extends BaseEntity {

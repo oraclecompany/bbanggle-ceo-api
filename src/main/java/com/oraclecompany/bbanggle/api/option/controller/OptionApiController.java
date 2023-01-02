@@ -1,5 +1,6 @@
 package com.oraclecompany.bbanggle.api.option.controller;
 
+import com.oraclecompany.bbanggle.api.option.dto.ProductOptionItemListResponseDto;
 import com.oraclecompany.bbanggle.api.option.dto.ProductOptionListResponseDto;
 import com.oraclecompany.bbanggle.api.option.service.OptionApiService;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionItem;
@@ -34,4 +35,14 @@ public class OptionApiController {
 
         return ResponseEntity.ok(productOptionListResponseDto);
     }
+
+    @ApiOperation(value = "상품 옵션 아이템 목록 조회 api", notes = "상품 옵션 아이템 목록 조회")
+    @GetMapping("/products/options/{optionId}/items")
+    public ResponseEntity<ProductOptionItemListResponseDto> getProductOptionItems(
+            @PathVariable("optionId") Long optionId) {
+        ProductOptionItemListResponseDto productOptionItemListResponseDto = optionApiService.getProductOptionItemList(optionId);
+        return ResponseEntity.ok(productOptionItemListResponseDto);
+    }
+
+
 }

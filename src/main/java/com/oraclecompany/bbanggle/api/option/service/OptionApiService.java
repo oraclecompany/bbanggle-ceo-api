@@ -1,5 +1,6 @@
 package com.oraclecompany.bbanggle.api.option.service;
 
+import com.oraclecompany.bbanggle.api.option.dto.ProductOptionItemListResponseDto;
 import com.oraclecompany.bbanggle.api.option.dto.ProductOptionListResponseDto;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionGroup;
@@ -29,5 +30,11 @@ public class OptionApiService {
         return productOptionGroups.stream()
                 .map(ProductOptionListResponseDto::of)
                 .toList();
+    }
+
+    public ProductOptionItemListResponseDto getProductOptionItemList(Long optionId) {
+        ProductOptionGroup productOptionGroup = productService.findProductOptionGroupById(optionId);
+        ProductOptionGroup productOptionItems = productService.findProductOptionItemList(productOptionGroup);
+        return ProductOptionItemListResponseDto.of(productOptionItems);
     }
 }

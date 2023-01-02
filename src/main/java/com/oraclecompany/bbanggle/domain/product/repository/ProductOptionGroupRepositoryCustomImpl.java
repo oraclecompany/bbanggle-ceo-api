@@ -1,7 +1,9 @@
 package com.oraclecompany.bbanggle.domain.product.repository;
 
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionGroup;
+import com.oraclecompany.bbanggle.domain.product.entity.QProductOptionGroup;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
@@ -47,15 +49,30 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
         return new PageImpl<>(productGroups, pageable, totalCount);
     }
 
-    private static BooleanExpression getProductOptionItemEq() {
+    @Override
+    public ProductOptionGroup findByProductOptionGroup(ProductOptionGroup productOption) {
+        return queryFactory
+                .selectFrom(productOptionGroup)
+                .leftJoin(productOptionItem).on(getProductOptionItemEq())
+                .leftJoin(productOptionLink).on(getProductOptionLinkEq())
+                .leftJoin(product).on(getProductEq())
+                .where(getProductOptionGroupEq(productOption))
+                .fetchOne();
+    }
+
+    private BooleanExpression getProductOptionGroupEq(ProductOptionGroup productOption) {
+        return productOptionGroup.eq(productOption);
+    }
+
+    private BooleanExpression getProductOptionItemEq() {
         return productOptionGroup.eq(productOptionItem.productOptionGroup);
     }
 
-    private static BooleanExpression getProductOptionLinkEq() {
+    private BooleanExpression getProductOptionLinkEq() {
         return productOptionGroup.eq(productOptionLink.productOptionGroup);
     }
 
-    private static BooleanExpression getProductEq() {
+    private BooleanExpression getProductEq() {
         return productOptionLink.product.eq(product);
     }
 
