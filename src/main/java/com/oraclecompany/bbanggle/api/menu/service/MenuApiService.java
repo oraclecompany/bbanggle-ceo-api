@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class MenuApiService {
 
@@ -39,21 +39,25 @@ public class MenuApiService {
         return new PageImpl<>(productListDto, pageable, productList.getTotalElements());
     }
 
+    @Transactional
     public void updateProductQuantity(Long productId, ProductQuantityUpdateDto productQuantityUpdateDto) {
         Product findProduct = productService.findProduct(productId);
         findProduct.modifyQuantity(productQuantityUpdateDto.getQuantity());
     }
 
+    @Transactional
     public void updateProductQuantityPlus(Long productId) {
         Product findProduct = productService.findProduct(productId);
         findProduct.plusQuantity();
     }
 
+    @Transactional
     public void updateProductQuantityMinus(Long productId) {
         Product findProduct = productService.findProduct(productId);
         findProduct.minusQuantity();
     }
 
+    @Transactional
     public void updateProductSellStatus(Long productId) {
         Product findProduct = productService.findProduct(productId);
         findProduct.toggleSellStatus();

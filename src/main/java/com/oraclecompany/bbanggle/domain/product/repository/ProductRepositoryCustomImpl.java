@@ -31,6 +31,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
         List<Product> products = queryFactory
                 .selectFrom(product).distinct()
                 .leftJoin(product.productTimetables, productTimetable)
+                .fetchJoin()
                 .where(
                         product.store.eq(store),
                         productTimetable.dayCode.in(todayDayCode)

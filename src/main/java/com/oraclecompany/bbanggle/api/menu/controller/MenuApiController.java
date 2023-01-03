@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequestMapping("/api/mm")
 @RestController
 @Api(value = "메뉴관리 화면", tags = "메뉴관리 화면")
-public class ManuApiController {
+public class MenuApiController {
 
     private final MenuApiService menuApiService;
 
