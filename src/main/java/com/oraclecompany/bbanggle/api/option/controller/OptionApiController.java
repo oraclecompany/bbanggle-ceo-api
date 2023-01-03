@@ -26,11 +26,11 @@ public class OptionApiController {
 
     @ApiOperation(value = "상품 옵션 목록 조회 api", notes = "상품 옵션 목록 조회")
     @GetMapping("/{storeId}/products/options")
-    public ResponseEntity<List<ProductOptionListResponseDto>> getProductOptions(
+    public ResponseEntity<Page<ProductOptionListResponseDto>> getProductOptions(
             @PathVariable("storeId") Long storeId,
             Optional<Integer> page) {
         Pageable pageable = PageRequest.of(page.orElse(0), 5);
-        List<ProductOptionListResponseDto> productOptionListResponseDto = optionApiService.getProductOptionList(storeId, pageable);
+        Page<ProductOptionListResponseDto> productOptionListResponseDto = optionApiService.getProductOptionList(storeId, pageable);
 
         return ResponseEntity.ok(productOptionListResponseDto);
     }
@@ -48,6 +48,6 @@ public class OptionApiController {
     public ResponseEntity<String> updateProductOptionItemSellStatus(
             @PathVariable("itemId") Long itemId) {
         optionApiService.updateProductOptionItemSellStatus(itemId);
-        return ResponseEntity.ok("픔절 싱테기 뱐경되었습니다.");
+        return ResponseEntity.ok("품절 싱태가 변경되었습니다.");
     }
 }

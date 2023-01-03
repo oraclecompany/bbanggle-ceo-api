@@ -65,4 +65,9 @@ public class ProductOptionItem extends BaseEntity {
     public void updateStatus(SellStatus status) {
         this.status = status;
     }
+
+
+    public void toggleSellStatus() {
+        this.status = (this.status == SellStatus.SELL ? SellStatus.SOLD_OUT : SellStatus.SELL);
+    }
 }

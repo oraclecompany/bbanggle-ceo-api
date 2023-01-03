@@ -4,6 +4,8 @@ import com.oraclecompany.bbanggle.domain.common.BaseEntity;
 import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
 import com.oraclecompany.bbanggle.domain.product.constant.SellStatus;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
+import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
+import com.oraclecompany.bbanggle.global.error.exception.InvalidValueException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -87,18 +89,27 @@ public class Product extends BaseEntity {
     }
 
     public void modifyQuantity(int quantity) {
+        if(this.quantity < 0 || this.quantity > 99) {
+            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
+        }
         this.quantity = quantity;
     }
 
     public void plusQuantity() {
-        this.quantity += 1;
+        if(this.quantity >= 99) {
+            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
+        }
+        this.quantity++;
     }
 
     public void minusQuantity() {
-        this.quantity -= 1;
+        if(this.quantity <= 0) {
+            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
+        }
+        this.quantity--;
     }
 
-    public void updateStatus(SellStatus status) {
-        this.status = status;
+    public void toggleSellStatus() {
+        this.status = this.status == SellStatus.SELL ? SellStatus.SOLD_OUT : SellStatus.SELL;
     }
 }

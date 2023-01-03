@@ -1,9 +1,7 @@
 package com.oraclecompany.bbanggle.domain.product.repository;
 
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionGroup;
-import com.oraclecompany.bbanggle.domain.product.entity.QProductOptionGroup;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
@@ -31,11 +29,11 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
 
         List<ProductOptionGroup> productGroups = queryFactory
                 .selectFrom(productOptionGroup)
-                .leftJoin(productOptionItem).on(getProductOptionItemEq())
-                .leftJoin(productOptionLink).on(getProductOptionLinkEq())
-                .leftJoin(product).on(getProductEq())
-                .where(getStoreEq(store))
-                .groupBy(productOptionGroup.name)
+                .leftJoin(productOptionGroup.productOptionItems, productOptionItem)
+                .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
+                .leftJoin(productOptionLink.product, product).fetchJoin()
+                .where(storeEq(store))
+                .groupBy(productOptionGroup.id)
                 .orderBy(productOptionGroup.name.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -53,30 +51,18 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
     public ProductOptionGroup findByProductOptionGroup(ProductOptionGroup productOption) {
         return queryFactory
                 .selectFrom(productOptionGroup)
-                .leftJoin(productOptionItem).on(getProductOptionItemEq())
-                .leftJoin(productOptionLink).on(getProductOptionLinkEq())
-                .leftJoin(product).on(getProductEq())
-                .where(getProductOptionGroupEq(productOption))
+                .leftJoin(productOptionGroup.productOptionItems, productOptionItem)
+                .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
+                .leftJoin(productOptionLink.product, product).fetchJoin()
+                .where(productOptionGroupEq(productOption))
                 .fetchOne();
     }
 
-    private BooleanExpression getProductOptionGroupEq(ProductOptionGroup productOption) {
-        return productOptionGroup.eq(productOption);
+    private BooleanExpression productOptionGroupEq(ProductOptionGroup productOption) {
+        return productOption != null ? productOptionGroup.eq(productOption) : null;
     }
 
-    private BooleanExpression getProductOptionItemEq() {
-        return productOptionGroup.eq(productOptionItem.productOptionGroup);
-    }
-
-    private BooleanExpression getProductOptionLinkEq() {
-        return productOptionGroup.eq(productOptionLink.productOptionGroup);
-    }
-
-    private BooleanExpression getProductEq() {
-        return productOptionLink.product.eq(product);
-    }
-
-    private BooleanExpression getStoreEq(Store store) {
-        return productOptionGroup.store.eq(store);
+    private BooleanExpression storeEq(Store store) {
+        return store != null ? productOptionGroup.store.eq(store) : null;
     }
 }

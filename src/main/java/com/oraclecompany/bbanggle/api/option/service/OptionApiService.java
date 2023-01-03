@@ -12,6 +12,7 @@ import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.domain.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +27,15 @@ public class OptionApiService {
     private final ProductService productService;
     private final StoreService storeService;
 
-    public List<ProductOptionListResponseDto> getProductOptionList(Long storeId, Pageable pageable) {
+    public Page<ProductOptionListResponseDto> getProductOptionList(Long storeId, Pageable pageable) {
         Store store = storeService.findStoreById(storeId);
         Page<ProductOptionGroup> productOptionGroups = productService.findProductOptionList(pageable, store);
-        return productOptionGroups.stream()
-                .map(ProductOptionListResponseDto::of)
-                .toList();
+        List<ProductOptionListResponseDto> productOptionListResponseDtos =
+                productOptionGroups.stream()
+                        .map(ProductOptionListResponseDto::of)
+                        .toList();
+
+        return new PageImpl<>(productOptionListResponseDtos, pageable, productOptionGroups.getTotalElements());
     }
 
     public ProductOptionItemListResponseDto getProductOptionItemList(Long optionId) {
@@ -42,10 +46,6 @@ public class OptionApiService {
 
     public void updateProductOptionItemSellStatus(Long itemId) {
         ProductOptionItem findProductOptionItem = productService.findProductOptionItem(itemId);
-        if(findProductOptionItem.getStatus() == SellStatus.SL) {
-            findProductOptionItem.updateStatus(SellStatus.SO);
-        } else {
-            findProductOptionItem.updateStatus(SellStatus.SL);
-        }
+        findProductOptionItem.toggleSellStatus();
     }
 }

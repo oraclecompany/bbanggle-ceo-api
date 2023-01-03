@@ -41,35 +41,21 @@ public class MenuApiService {
 
     public void updateProductQuantity(Long productId, ProductQuantityUpdateDto productQuantityUpdateDto) {
         Product findProduct = productService.findProduct(productId);
-        if(productQuantityUpdateDto.getQuantity() < 0 || productQuantityUpdateDto.getQuantity() > 99) {
-            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
-        }
         findProduct.modifyQuantity(productQuantityUpdateDto.getQuantity());
     }
 
     public void updateProductQuantityPlus(Long productId) {
         Product findProduct = productService.findProduct(productId);
-        if(findProduct.getQuantity() == 99) {
-            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
-        }
         findProduct.plusQuantity();
     }
 
     public void updateProductQuantityMinus(Long productId) {
         Product findProduct = productService.findProduct(productId);
-        if (findProduct.getQuantity() == 0) {
-            findProduct.updateStatus(SellStatus.SL);
-            throw new InvalidValueException(ErrorCode.INVALID_PRODUCT_QUANTITY);
-        }
         findProduct.minusQuantity();
     }
 
     public void updateProductSellStatus(Long productId) {
         Product findProduct = productService.findProduct(productId);
-        if (findProduct.getStatus() == SellStatus.SL) {
-            findProduct.updateStatus(SellStatus.SO);
-        } else {
-            findProduct.updateStatus(SellStatus.SL);
-        }
+        findProduct.toggleSellStatus();
     }
 }
