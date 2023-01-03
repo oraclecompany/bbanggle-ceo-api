@@ -2,6 +2,7 @@ package com.oraclecompany.bbanggle.api.common.controller;
 
 import com.oraclecompany.bbanggle.api.common.dto.StoreStatusModifyDto;
 import com.oraclecompany.bbanggle.api.common.service.CommonApiService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/cm")
 @RequiredArgsConstructor
+@Api(value = "01. 공통", tags = "01. 공통")
 public class CommonApiController {
 
     private final CommonApiService commonApiService;

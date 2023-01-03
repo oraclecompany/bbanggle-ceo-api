@@ -19,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/api/om")
 @RestController
+@Api(value = "옵션관리 화면", tags = "옵션관리 화면")
 public class OptionApiController {
 
     private final OptionApiService optionApiService;

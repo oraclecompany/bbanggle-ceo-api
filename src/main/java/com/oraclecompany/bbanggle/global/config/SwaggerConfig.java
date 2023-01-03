@@ -1,6 +1,6 @@
 package com.oraclecompany.bbanggle.global.config;
 
-import com.oraclecompany.bbanggle.memberinfo.CeoInfo;
+import com.oraclecompany.bbanggle.global.resolver.ceoinfo.CeoInfo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
