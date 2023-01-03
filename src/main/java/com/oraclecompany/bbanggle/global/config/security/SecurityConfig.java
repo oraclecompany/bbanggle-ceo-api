@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // other public endpoints of your API may be appended to this array
             "/h2/**",
             "/h2-console/**",
-            "/**"
+//            "/**"
     };
 
     @Override

@@ -1,5 +1,6 @@
 package com.oraclecompany.bbanggle.global.config;
 
+import com.oraclecompany.bbanggle.memberinfo.CeoInfo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,7 +14,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.Arrays;
 import java.util.List;
 
 @EnableWebMvc
@@ -30,6 +30,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false) // swagger에서 제공하는 기본 응답 코드 설명 제거
                 .securityContexts(List.of(securityContext())) // Authorization JWT 설정
                 .securitySchemes(List.of(apiKey())) // Authorization JWT 설정
+                .ignoredParameterTypes(CeoInfo.class)
                 ;
     }
 

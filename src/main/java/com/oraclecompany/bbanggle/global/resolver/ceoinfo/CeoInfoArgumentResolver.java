@@ -21,9 +21,9 @@ public class CeoInfoArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        boolean hasMemberInfoAnnotation = parameter.hasParameterAnnotation(CeoInfo.class);
-        boolean hasMemberInfoDto = CeoInfoDto.class.isAssignableFrom(parameter.getParameterType());
-        return hasMemberInfoAnnotation && hasMemberInfoDto;
+        boolean hasCeoInfoAnnotation = parameter.hasParameterAnnotation(CeoInfo.class);
+        boolean hasCeoInfoDto = CeoInfoDto.class.isAssignableFrom(parameter.getParameterType());
+        return hasCeoInfoAnnotation && hasCeoInfoDto;
     }
 
     @Override

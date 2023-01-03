@@ -8,12 +8,12 @@ import com.oraclecompany.bbanggle.domain.product.constant.SellStatus;
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
 import com.oraclecompany.bbanggle.domain.product.service.ProductService;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
-import com.oraclecompany.bbanggle.domain.store.service.StoreService;
 import com.oraclecompany.bbanggle.global.error.exception.ErrorCode;
 import com.oraclecompany.bbanggle.global.error.exception.InvalidValueException;
 import com.oraclecompany.bbanggle.global.resolver.ceoinfo.CeoInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,14 +28,15 @@ public class MenuApiService {
     private final ProductService productService;
     private final CeoService ceoService;
 
-    public List<ProductListDto.Response> getProductList(Pageable pageable, CeoInfoDto ceoInfoDto) {
+    public Page<ProductListDto.Response> getProductList(Pageable pageable, CeoInfoDto ceoInfoDto) {
         Ceo findCeo = ceoService.findCeoById(ceoInfoDto.getCeoId());
         Store store = findCeo.getStore();
         Page<Product> productList = productService.findProductList(pageable, store);
-
-        return productList.stream()
+        List<ProductListDto.Response> productListDto = productList
                 .map(ProductListDto.Response::of)
                 .toList();
+
+        return new PageImpl<>(productListDto, pageable, productList.getTotalElements());
     }
 
     public void updateProductQuantity(Long productId, ProductQuantityUpdateDto productQuantityUpdateDto) {
