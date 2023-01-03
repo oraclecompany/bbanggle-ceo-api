@@ -1,8 +1,6 @@
 package com.oraclecompany.bbanggle.domain.product.entity;
 
 import com.oraclecompany.bbanggle.domain.common.BaseEntity;
-import com.oraclecompany.bbanggle.domain.common.constant.YesOrNo;
-import com.oraclecompany.bbanggle.domain.product.constant.DayCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

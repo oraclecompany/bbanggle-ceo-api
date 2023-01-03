@@ -29,7 +29,6 @@ public class OptionApiController {
             Optional<Integer> page) {
         Pageable pageable = PageRequest.of(page.orElse(0), 5);
         Page<ProductOptionListDto.Response> productOptionListDto = optionApiService.getProductOptionList(storeId, pageable);
-
         return ResponseEntity.ok(productOptionListDto);
     }
 

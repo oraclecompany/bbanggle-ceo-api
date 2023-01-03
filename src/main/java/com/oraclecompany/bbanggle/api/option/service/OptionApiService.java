@@ -4,6 +4,8 @@ import com.oraclecompany.bbanggle.api.option.dto.ProductOptionGroupDetailDto;
 import com.oraclecompany.bbanggle.api.option.dto.ProductOptionListDto;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionGroup;
 import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionItem;
+import com.oraclecompany.bbanggle.domain.product.service.ProductOptionGroupService;
+import com.oraclecompany.bbanggle.domain.product.service.ProductOptionItemService;
 import com.oraclecompany.bbanggle.domain.product.service.ProductService;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.domain.store.service.StoreService;
@@ -21,12 +23,13 @@ import java.util.List;
 @Service
 public class OptionApiService {
 
-    private final ProductService productService;
+    private final ProductOptionGroupService productOptionGroupService;
+    private final ProductOptionItemService productOptionItemService;
     private final StoreService storeService;
 
     public Page<ProductOptionListDto.Response> getProductOptionList(Long storeId, Pageable pageable) {
         Store store = storeService.findStoreById(storeId);
-        Page<ProductOptionGroup> productOptionGroups = productService.findProductOptionList(pageable, store);
+        Page<ProductOptionGroup> productOptionGroups = productOptionGroupService.findProductOptionList(pageable, store);
         List<ProductOptionListDto.Response> productOptionListResponseDtos =
                 productOptionGroups.stream()
                         .map(ProductOptionListDto.Response::of)
@@ -35,13 +38,13 @@ public class OptionApiService {
     }
 
     public ProductOptionGroupDetailDto.Response getProductOptionGroupDetails(Long productOptionGroupId) {
-        ProductOptionGroup productOptionGroup = productService.findProductOptionGroupById(productOptionGroupId);
+        ProductOptionGroup productOptionGroup = productOptionGroupService.findProductOptionGroupById(productOptionGroupId);
         return ProductOptionGroupDetailDto.Response.of(productOptionGroup);
     }
 
     @Transactional
     public void updateProductOptionItemSellStatus(Long itemId) {
-        ProductOptionItem findProductOptionItem = productService.findProductOptionItem(itemId);
+        ProductOptionItem findProductOptionItem = productOptionItemService.findProductOptionItem(itemId);
         findProductOptionItem.toggleSellStatus();
     }
 }

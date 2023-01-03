@@ -83,10 +83,6 @@ public class ProductOptionGroupDetailDto {
 
         private int seq;
 
-        private Long productOptionGroupId;
-
-        private String productOptionGroupName;
-
         private SellStatus status;
 
         public static ProductOptionItemDto of(ProductOptionItem productOptionItem) {
@@ -95,8 +91,6 @@ public class ProductOptionGroupDetailDto {
                     .name(productOptionItem.getName())
                     .price(productOptionItem.getPrice())
                     .seq(productOptionItem.getSeq())
-                    .productOptionGroupId(productOptionItem.getProductOptionGroup().getId())
-                    .productOptionGroupName(productOptionItem.getProductOptionGroup().getName())
                     .status(productOptionItem.getStatus())
                     .build();
         }
