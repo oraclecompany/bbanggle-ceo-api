@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RequiredArgsConstructor    //생성자 주입, final이 붙거나 @NotNull이 붙은 필드의 생성자를 자동 생성
-@Transactional              //트랜잭션 보장
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class ProductService {
 
@@ -42,12 +42,7 @@ public class ProductService {
     }
 
     public ProductOptionGroup findProductOptionGroupById(Long optionId) {
-        return productOptionGroupRepository.findById(optionId)
-                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOT_EXIST_PRODUCT_OPTION));
-    }
-
-    public ProductOptionGroup findProductOptionItemList(ProductOptionGroup productOptionGroup) {
-        return productOptionGroupRepository.findByProductOptionGroup(productOptionGroup);
+        return productOptionGroupRepository.findByProductOptionGroupId(optionId);
     }
 
     public ProductOptionItem findProductOptionItem(Long itemId) {

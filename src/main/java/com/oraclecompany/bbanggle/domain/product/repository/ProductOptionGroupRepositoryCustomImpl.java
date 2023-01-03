@@ -29,11 +29,11 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
 
         List<ProductOptionGroup> productGroups = queryFactory
                 .selectFrom(productOptionGroup)
+                .distinct()
                 .leftJoin(productOptionGroup.productOptionItems, productOptionItem)
                 .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
                 .leftJoin(productOptionLink.product, product).fetchJoin()
                 .where(storeEq(store))
-                .groupBy(productOptionGroup.id)
                 .orderBy(productOptionGroup.name.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -48,18 +48,19 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
     }
 
     @Override
-    public ProductOptionGroup findByProductOptionGroup(ProductOptionGroup productOption) {
+    public ProductOptionGroup findByProductOptionGroupId(Long productOptionGroupId) {
         return queryFactory
                 .selectFrom(productOptionGroup)
+                .distinct()
                 .leftJoin(productOptionGroup.productOptionItems, productOptionItem)
                 .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
                 .leftJoin(productOptionLink.product, product).fetchJoin()
-                .where(productOptionGroupEq(productOption))
+                .where(productOptionGroupIdEq(productOptionGroupId))
                 .fetchOne();
     }
 
-    private BooleanExpression productOptionGroupEq(ProductOptionGroup productOption) {
-        return productOption != null ? productOptionGroup.eq(productOption) : null;
+    private BooleanExpression productOptionGroupIdEq(Long productOptionGroupId) {
+        return productOptionGroupId != null ? productOptionGroup.id.eq(productOptionGroupId) : null;
     }
 
     private BooleanExpression storeEq(Store store) {

@@ -9,8 +9,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ProductOptionGroupRepository extends JpaRepository<ProductOptionGroup, Long>, ProductOptionGroupRepositoryCustom {
-
-    Page<ProductOptionGroup> findByStore(Pageable pageable, Store store);
-
-    ProductOptionGroup findByProductOptionGroup(ProductOptionGroup productOptionGroup);
 }
