@@ -3,17 +3,19 @@ package com.oraclecompany.bbanggle.api.menu.controller;
 import com.oraclecompany.bbanggle.api.menu.dto.ProductListDto;
 import com.oraclecompany.bbanggle.api.menu.dto.ProductQuantityUpdateDto;
 import com.oraclecompany.bbanggle.api.menu.service.MenuApiService;
-import com.oraclecompany.bbanggle.memberinfo.CeoInfoDto;
 import com.oraclecompany.bbanggle.memberinfo.CeoInfo;
+import com.oraclecompany.bbanggle.memberinfo.CeoInfoDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/mm")
@@ -25,9 +27,10 @@ public class ManuApiController {
 
     @ApiOperation(value = "상품 목록 조회 api", notes = "상품 목록 조회")
     @GetMapping("/products")
-    public ResponseEntity<List<ProductListDto.Response>> getProductList(
-            Pageable pageable,
+    public ResponseEntity<Page<ProductListDto.Response>> getProductList(
+            Optional<Integer> page,
             @CeoInfo CeoInfoDto ceoInfoDto) {
+        Pageable pageable = PageRequest.of(page.orElse(0), 5);
         return ResponseEntity.ok(menuApiService.getProductList(pageable, ceoInfoDto));
     }
 
