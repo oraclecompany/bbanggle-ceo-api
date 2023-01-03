@@ -1,10 +1,6 @@
 package com.oraclecompany.bbanggle.domain.product.service;
 
 import com.oraclecompany.bbanggle.domain.product.entity.Product;
-import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionGroup;
-import com.oraclecompany.bbanggle.domain.product.entity.ProductOptionItem;
-import com.oraclecompany.bbanggle.domain.product.repository.ProductOptionGroupRepository;
-import com.oraclecompany.bbanggle.domain.product.repository.ProductOptionItemRepository;
 import com.oraclecompany.bbanggle.domain.product.repository.ProductRepository;
 import com.oraclecompany.bbanggle.domain.store.entity.Store;
 import com.oraclecompany.bbanggle.global.error.exception.EntityNotFoundException;

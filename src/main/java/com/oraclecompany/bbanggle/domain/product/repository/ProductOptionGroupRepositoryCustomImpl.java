@@ -26,12 +26,8 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
 
     @Override
     public Page<ProductOptionGroup> findByStore(Pageable pageable, Store store) {
-
         List<ProductOptionGroup> productGroups = queryFactory
                 .selectFrom(productOptionGroup)
-                .distinct()
-                .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
-                .leftJoin(productOptionLink.product, product).fetchJoin()
                 .where(storeEq(store))
                 .orderBy(productOptionGroup.name.asc())
                 .offset(pageable.getOffset())
