@@ -30,7 +30,6 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
         List<ProductOptionGroup> productGroups = queryFactory
                 .selectFrom(productOptionGroup)
                 .distinct()
-                .leftJoin(productOptionGroup.productOptionItems, productOptionItem)
                 .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
                 .leftJoin(productOptionLink.product, product).fetchJoin()
                 .where(storeEq(store))
@@ -56,6 +55,7 @@ public class ProductOptionGroupRepositoryCustomImpl implements ProductOptionGrou
                 .leftJoin(productOptionGroup.productOptionLinks, productOptionLink).fetchJoin()
                 .leftJoin(productOptionLink.product, product).fetchJoin()
                 .where(productOptionGroupIdEq(productOptionGroupId))
+                .orderBy(productOptionItem.seq.asc())
                 .fetchOne();
     }
 
