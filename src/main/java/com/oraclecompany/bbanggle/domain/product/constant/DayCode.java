@@ -28,13 +28,14 @@ public enum DayCode {
 
     public static List<DayCode> findDayCode(int dayOfWeek) {
         List<DayCode> dayCodes = new java.util.ArrayList<>(List.of());
+
         for (DayCode dayCode : DayCode.values()) {
             if (dayCode.number.contains(String.valueOf(dayOfWeek))) {
                 dayCodes.add(dayCode);
             }
         }
-        return dayCodes;
 
+        return dayCodes;
     }
 
 }

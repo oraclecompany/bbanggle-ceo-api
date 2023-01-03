@@ -43,6 +43,7 @@ public class ProductListDto {
 
         @Builder
         public static Response of(Product product) {
+
             return Response.builder()
                     .productId(product.getId())
                     .ProductGroupName(product.getProductGroup() != null ? product.getProductGroup().getName() : "")

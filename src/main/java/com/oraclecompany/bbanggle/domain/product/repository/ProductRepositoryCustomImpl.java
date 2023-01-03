@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static com.oraclecompany.bbanggle.domain.product.entity.QProduct.product;
+import static com.oraclecompany.bbanggle.domain.product.entity.QProductGroup.productGroup;
 import static com.oraclecompany.bbanggle.domain.product.entity.QProductTimetable.productTimetable;
 
 public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
@@ -30,7 +31,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 
         List<Product> products = queryFactory
                 .selectFrom(product).distinct()
-                .leftJoin(product.productTimetables, productTimetable).fetchJoin()
+                .leftJoin(product.productTimetables, productTimetable)
                 .where(
                         product.store.eq(store),
                         productTimetable.dayCode.in(todayDayCode)
